@@ -46,15 +46,27 @@ export function MainHero() {
           style={{ borderRadius }}
           className="w-full h-full relative overflow-hidden transition-all duration-75 shadow-2xl"
         >
+          {/* Mobile video — portrait crop, full height */}
           <video
-            key="hero-video-v2"
+            key="hero-video-mobile"
+            src="/assets/mob_hero_video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover object-[center_top] opacity-85 filter brightness-95 saturate-95 block md:hidden"
+          />
+          {/* Desktop video */}
+          <video
+            key="hero-video-desktop"
             src="/assets/Hero_video.mp4"
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover opacity-85 filter brightness-95 saturate-95"
+            className="absolute inset-0 w-full h-full object-cover opacity-85 filter brightness-95 saturate-95 hidden md:block"
           />
         </motion.div>
       </motion.div>

@@ -305,8 +305,8 @@ export default function CatalogPage() {
       {/* Main Catalogue Grid Section */}
       <section className="py-20 px-4 sm:px-8 md:px-12 lg:px-16 max-w-[1800px] mx-auto space-y-16 sm:space-y-20">
         
-        {/* Category Filter Tabs — Single Row Alignment */}
-        <div className="flex items-center justify-center gap-2.5 sm:gap-3 lg:gap-4 border-b border-[#DCC8AA]/15 pb-8 overflow-x-auto whitespace-nowrap">
+        {/* Category Filter Tabs — scrollable on mobile, centered on desktop */}
+        <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-4 border-b border-[#DCC8AA]/15 pb-8 overflow-x-auto whitespace-nowrap px-4 md:px-0 md:justify-center scrollbar-hide">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat.id;
             return (

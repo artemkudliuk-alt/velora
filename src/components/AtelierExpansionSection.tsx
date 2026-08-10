@@ -18,150 +18,174 @@ interface ExpansionLine {
 }
 
 const EXPANSION_LINES: ExpansionLine[] = [
-  { id: "01", num: "01", titleEN: "Evening Dresses", titleUA: "Вечірні Сукні", category: "COUTURE", noteEN: "Red carpet & gala silk gowns", noteUA: "Кутюрні шовкові сукні для червоної доріжки", yearEN: "2026", yearUA: "2026" },
-  { id: "02", num: "02", titleEN: "Cocktail Dresses", titleUA: "Коктейльні Сукні", category: "COUTURE", noteEN: "Architectural reception silhouettes", noteUA: "Архітектурні силуети для прийомів", yearEN: "2026", yearUA: "2026" },
-  { id: "03", num: "03", titleEN: "Luxury Daywear", titleUA: "Розкішний Денний Одяг", category: "COUTURE", noteEN: "Tailored silk & crepe daywear", noteUA: "Витончений шовковий та креповий одяг", yearEN: "2026", yearUA: "2026" },
-  { id: "04", num: "04", titleEN: "Business & Office Fashion", titleUA: "Діловий та Офісний Стиль", category: "COUTURE", noteEN: "Executive wool suits & blazers", noteUA: "Ексклюзивні вовняні костюми та блейзери", yearEN: "2026", yearUA: "2026" },
-  
-  { id: "05", num: "05", titleEN: "Winter Collections", titleUA: "Зимові Колекції", category: "SEASONAL", noteEN: "Velvet coats & cashmere capes", noteUA: "Оксамитові пальта та кашемірові накидки", yearEN: "2026/27", yearUA: "2026/27" },
-  { id: "06", num: "06", titleEN: "Outerwear", titleUA: "Верхній Одяг", category: "SEASONAL", noteEN: "Double-face cashmere outerwear", noteUA: "Двосторонній кашеміровий верхній одяг", yearEN: "2026", yearUA: "2026" },
-  { id: "07", num: "07", titleEN: "Knitwear", titleUA: "Трикотаж", category: "SEASONAL", noteEN: "Cashmere & merino rib knits", noteUA: "Кашеміровий та мериносовий трикотаж в рубчик", yearEN: "Available", yearUA: "В наявності" },
-  { id: "08", num: "08", titleEN: "Resort Wear", titleUA: "Круїзна Колекція", category: "SEASONAL", noteEN: "Chiffon kaftans & linen sets", noteUA: "Шифонові кафтани та лляні комплекти", yearEN: "2027", yearUA: "2027" },
-
-  { id: "09", num: "09", titleEN: "Premium Accessories", titleUA: "Преміальні Аксесуари", category: "ACCESSORIES", noteEN: "Silk scarves & leather belts", noteUA: "Шовкові хустки та шкіряні ремені", yearEN: "2026", yearUA: "2026" },
-  { id: "10", num: "10", titleEN: "Luxury Handbags", titleUA: "Розкішні Сумки", category: "ACCESSORIES", noteEN: "Structured leather clutches", noteUA: "Структуровані шкіряні клатчі", yearEN: "2026", yearUA: "2026" },
-  { id: "11", num: "11", titleEN: "Footwear", titleUA: "Взуття", category: "ACCESSORIES", noteEN: "Satin heels & leather boots", noteUA: "Атласні туфлі на підборах та шкіряні чоботи", yearEN: "2027", yearUA: "2027" },
-  { id: "12", num: "12", titleEN: "Fine Jewelry & Sculptures", titleUA: "Ювелірні Вироби та Скульптури", category: "ACCESSORIES", noteEN: "24K gold filigree & heirloom art", noteUA: "Золота філігрань 24K та сімейні реліквії", yearEN: "Signature", yearUA: "Авторська" },
+  { id: "01", num: "01", titleEN: "Evening Dresses",        titleUA: "Вечірні Сукні",             category: "COUTURE",     noteEN: "Red carpet & gala silk gowns",          noteUA: "Кутюрні шовкові сукні для червоної доріжки",  yearEN: "2026",      yearUA: "2026" },
+  { id: "02", num: "02", titleEN: "Cocktail Dresses",       titleUA: "Коктейльні Сукні",          category: "COUTURE",     noteEN: "Architectural reception silhouettes",    noteUA: "Архітектурні силуети для прийомів",            yearEN: "2026",      yearUA: "2026" },
+  { id: "03", num: "03", titleEN: "Luxury Daywear",         titleUA: "Розкішний Денний Одяг",     category: "COUTURE",     noteEN: "Tailored silk & crepe daywear",          noteUA: "Витончений шовковий та креповий одяг",        yearEN: "2026",      yearUA: "2026" },
+  { id: "04", num: "04", titleEN: "Business & Office",      titleUA: "Діловий та Офісний",        category: "COUTURE",     noteEN: "Executive wool suits & blazers",         noteUA: "Ексклюзивні вовняні костюми та блейзери",     yearEN: "2026",      yearUA: "2026" },
+  { id: "05", num: "05", titleEN: "Winter Collections",     titleUA: "Зимові Колекції",           category: "SEASONAL",    noteEN: "Velvet coats & cashmere capes",          noteUA: "Оксамитові пальта та кашемірові накидки",     yearEN: "2026/27",   yearUA: "2026/27" },
+  { id: "06", num: "06", titleEN: "Outerwear",              titleUA: "Верхній Одяг",              category: "SEASONAL",    noteEN: "Double-face cashmere outerwear",         noteUA: "Двосторонній кашеміровий верхній одяг",       yearEN: "2026",      yearUA: "2026" },
+  { id: "07", num: "07", titleEN: "Knitwear",               titleUA: "Трикотаж",                  category: "SEASONAL",    noteEN: "Cashmere & merino rib knits",            noteUA: "Кашеміровий та мериносовий трикотаж",         yearEN: "Available", yearUA: "В наявності" },
+  { id: "08", num: "08", titleEN: "Resort Wear",            titleUA: "Круїзна Колекція",          category: "SEASONAL",    noteEN: "Chiffon kaftans & linen sets",           noteUA: "Шифонові кафтани та лляні комплекти",         yearEN: "2027",      yearUA: "2027" },
+  { id: "09", num: "09", titleEN: "Premium Accessories",    titleUA: "Преміальні Аксесуари",      category: "ACCESSORIES", noteEN: "Silk scarves & leather belts",           noteUA: "Шовкові хустки та шкіряні ремені",            yearEN: "2026",      yearUA: "2026" },
+  { id: "10", num: "10", titleEN: "Luxury Handbags",        titleUA: "Розкішні Сумки",            category: "ACCESSORIES", noteEN: "Structured leather clutches",            noteUA: "Структуровані шкіряні клатчі",                yearEN: "2026",      yearUA: "2026" },
+  { id: "11", num: "11", titleEN: "Footwear",               titleUA: "Взуття",                    category: "ACCESSORIES", noteEN: "Satin heels & leather boots",            noteUA: "Атласні туфлі та шкіряні чоботи",             yearEN: "2027",      yearUA: "2027" },
+  { id: "12", num: "12", titleEN: "Fine Jewelry",           titleUA: "Ювелірні Вироби",           category: "ACCESSORIES", noteEN: "24K gold filigree & heirloom art",       noteUA: "Золота філігрань 24K та реліквії",             yearEN: "Signature", yearUA: "Авторська" },
 ];
+
+const GROUPS: { id: ExpansionLine["category"]; labelEN: string; labelUA: string }[] = [
+  { id: "COUTURE",     labelEN: "Couture Lines",  labelUA: "Кутюрні Лінії" },
+  { id: "SEASONAL",    labelEN: "Seasonal Lines", labelUA: "Сезонні Лінії" },
+  { id: "ACCESSORIES", labelEN: "Accessories",    labelUA: "Аксесуари"     },
+];
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <motion.svg
+      animate={{ rotate: open ? 180 : 0 }}
+      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+      width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </motion.svg>
+  );
+}
 
 export function AtelierExpansionSection() {
   const { language, t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<string>("ALL");
+  // COUTURE open by default
+  const [openGroups, setOpenGroups] = useState<Set<string>>(new Set(["COUTURE"]));
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const tabs = [
-    { id: "ALL", label: language === "UA" ? "УСІ ЛІНІЇ (12)" : "ALL LINES (12)" },
-    { id: "COUTURE", label: language === "UA" ? "КУТЮР (4)" : "COUTURE (4)" },
-    { id: "SEASONAL", label: language === "UA" ? "СЕЗОННІ (4)" : "SEASONAL (4)" },
-    { id: "ACCESSORIES", label: language === "UA" ? "АКСЕСУАРИ (4)" : "ACCESSORIES (4)" },
-  ];
-
-  const filteredLines = EXPANSION_LINES.filter(
-    (line) => activeTab === "ALL" || line.category === activeTab
-  );
+  const toggleGroup = (id: string) => {
+    setOpenGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   return (
     <section className="relative z-30 w-full pt-16 sm:pt-24 pb-24 sm:pb-32 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#060803] text-[#F3EEE6]">
-      <div className="max-w-[1600px] mx-auto space-y-12">
-        
-        {/* Minimalist Top Header Bar with Generous Breathing Room */}
-        <ParallaxReveal yOffset={24} duration={0.85}>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 border-b border-[#C9A063]/20 pb-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <span className="h-[1px] w-10 bg-[#C9A063]/50" />
-                <span className="font-mono text-xs sm:text-sm text-[#C9A063] tracking-[0.35em] uppercase font-semibold">
-                  {t("atelierEyebrow")}
-                </span>
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#F3EEE6] uppercase tracking-[0.06em] leading-[1.18]">
-                {t("atelierTitle")}
-              </h2>
-            </div>
+      <div className="max-w-[860px] mx-auto space-y-12">
 
-            {/* Sleek Minimalist Category Filter Pills — Single Row Alignment */}
-            <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto whitespace-nowrap pb-1">
-              {tabs.map((tab) => {
-                const isActive = activeTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`px-3.5 sm:px-5 py-2.5 font-mono text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] whitespace-nowrap flex-shrink-0 transition-all duration-300 rounded-none cursor-pointer border ${
-                      isActive
-                        ? "bg-[#C9A063] text-[#060803] border-[#C9A063] font-medium shadow-[0_0_20px_rgba(201,160,99,0.25)]"
-                        : "bg-transparent text-[#DCC8AA]/70 border-[#DCC8AA]/15 hover:border-[#C9A063]/50 hover:text-[#F3EEE6]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                );
-              })}
+        {/* ── Centered Header ─────────────────────────────────────────── */}
+        <ParallaxReveal yOffset={24} duration={0.85}>
+          <div className="text-center space-y-5 pb-10">
+            <div className="flex items-center justify-center space-x-3">
+              <span className="h-[1px] w-10 bg-[#C9A063]/50" />
+              <span className="font-mono text-xs sm:text-sm text-[#C9A063] tracking-[0.35em] uppercase font-semibold">
+                {t("atelierEyebrow")}
+              </span>
+              <span className="h-[1px] w-10 bg-[#C9A063]/50" />
             </div>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#F3EEE6] uppercase tracking-[0.06em] leading-[1.18]">
+              {t("atelierTitle")}
+            </h2>
           </div>
         </ParallaxReveal>
 
-        {/* Sleek 2-Column Typographic Directory List with Instant & Animated Filter Transitions */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0">
-          <AnimatePresence mode="popLayout">
-            {filteredLines.map((line, index) => {
-              const isHovered = hoveredId === line.id;
-              const title = language === "UA" ? line.titleUA : line.titleEN;
-              const note = language === "UA" ? line.noteUA : line.noteEN;
-              const year = language === "UA" ? line.yearUA : line.yearEN;
+        {/* ── Accordion Groups ─────────────────────────────────────────── */}
+        <div className="divide-y divide-[#DCC8AA]/12">
+          {GROUPS.map((group) => {
+            const isOpen = openGroups.has(group.id);
+            const lines = EXPANSION_LINES.filter((l) => l.category === group.id);
+            const label = language === "UA" ? group.labelUA : group.labelEN;
 
-              return (
-                <motion.div
-                  key={line.id}
-                  layout
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  onMouseEnter={() => setHoveredId(line.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  className={`group relative border-b border-[#DCC8AA]/15 py-5 flex items-center justify-between cursor-pointer transition-all duration-300 ${
-                    isHovered ? "translate-x-2.5 bg-[#C9A063]/5 pl-3 pr-2" : ""
-                  }`}
+            return (
+              <div key={group.id} className="overflow-hidden">
+
+                {/* Group Toggle Header */}
+                <button
+                  onClick={() => toggleGroup(group.id)}
+                  className="w-full flex items-center justify-between px-2 sm:px-4 py-5 sm:py-6 cursor-pointer transition-colors duration-300 hover:bg-[#C9A063]/4 group"
                 >
-                  <div className="flex items-center space-x-6 flex-1 min-w-0 pr-4">
-                    {/* Index Number */}
-                    <span className={`font-sans text-xs sm:text-sm tracking-widest font-semibold transition-all duration-300 ${
-                      isHovered ? "text-[#C9A063] scale-110" : "text-[#C9A063]/80"
-                    }`}>
-                      {line.num}
+                  <div className="flex items-center space-x-4">
+                    <span className="font-mono text-[10px] sm:text-xs text-[#C9A063] tracking-[0.3em] uppercase font-semibold">
+                      {group.id}
                     </span>
-
-                    {/* Title & Hover Note */}
-                    <div className="space-y-0.5 min-w-0">
-                      <h3
-                        className={`font-serif text-lg sm:text-xl font-light uppercase tracking-wide transition-colors truncate ${
-                          isHovered ? "text-[#C9A063]" : "text-[#F3EEE6]"
-                        }`}
-                      >
-                        {title}
-                      </h3>
-                      <p className="font-sans text-xs sm:text-sm text-[#DCC8AA]/80 font-light truncate">
-                        {note}
-                      </p>
-                    </div>
+                    <span className="font-serif text-base sm:text-lg md:text-xl font-light uppercase tracking-[0.1em] text-[#F3EEE6] group-hover:text-[#C9A063] transition-colors duration-300">
+                      {label}
+                    </span>
                   </div>
-
-                  {/* Right Status Badge & Arrow */}
-                  <div className="flex items-center space-x-4 flex-shrink-0">
-                    <span className="font-sans text-xs text-[#DCC8AA]/70 tracking-wider uppercase hidden sm:inline-block">
-                      {year}
+                  <div className="flex items-center space-x-3 flex-shrink-0">
+                    <span className="font-mono text-[10px] text-[#DCC8AA]/40 tracking-widest">
+                      {String(lines.length).padStart(2, "0")}
                     </span>
-                    <span
-                      className={`font-sans text-base text-[#C9A063] transition-all duration-300 ${
-                        isHovered ? "translate-x-2 opacity-100 scale-125" : "opacity-30"
-                      }`}
+                    <span className={`transition-colors duration-300 ${isOpen ? "text-[#C9A063]" : "text-[#DCC8AA]/35 group-hover:text-[#C9A063]/70"}`}>
+                      <Chevron open={isOpen} />
+                    </span>
+                  </div>
+                </button>
+
+                {/* Collapsible Item List */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="body"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      style={{ overflow: "hidden" }}
                     >
-                      →
-                    </span>
-                  </div>
+                      <div className="divide-y divide-[#DCC8AA]/8 pb-2">
+                        {lines.map((line) => {
+                          const isHov = hoveredId === line.id;
+                          const title = language === "UA" ? line.titleUA : line.titleEN;
+                          const note  = language === "UA" ? line.noteUA  : line.noteEN;
+                          const year  = language === "UA" ? line.yearUA  : line.yearEN;
 
-                  {/* Active hairline hover glow indicator */}
-                  <div
-                    className={`absolute bottom-0 left-0 h-[1.5px] bg-[#C9A063] transition-all duration-300 ${
-                      isHovered ? "w-full shadow-[0_0_10px_rgba(201,160,99,0.8)]" : "w-0"
-                    }`}
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+                          return (
+                            <div
+                              key={line.id}
+                              onMouseEnter={() => setHoveredId(line.id)}
+                              onMouseLeave={() => setHoveredId(null)}
+                              className={`relative py-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 ${
+                                isHov ? "pl-5 bg-[#C9A063]/[0.04]" : "pl-2 sm:pl-4"
+                              }`}
+                            >
+                              <div className="flex items-center space-x-5 flex-1 min-w-0 pr-4">
+                                <span className={`font-sans text-xs tracking-widest font-semibold flex-shrink-0 transition-colors duration-300 ${
+                                  isHov ? "text-[#C9A063]" : "text-[#C9A063]/55"
+                                }`}>
+                                  {line.num}
+                                </span>
+                                <div className="space-y-0.5 min-w-0">
+                                  <h3 className={`font-serif text-sm sm:text-base md:text-lg font-light uppercase tracking-wide transition-colors duration-300 ${
+                                    isHov ? "text-[#C9A063]" : "text-[#F3EEE6]"
+                                  }`}>
+                                    {title}
+                                  </h3>
+                                  <p className="font-sans text-[11px] sm:text-xs text-[#DCC8AA]/65 font-light">
+                                    {note}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="flex items-center space-x-3 flex-shrink-0">
+                                <span className="font-sans text-xs text-[#DCC8AA]/45 tracking-wider uppercase hidden sm:inline-block">
+                                  {year}
+                                </span>
+                                <span className={`font-sans text-sm text-[#C9A063] transition-all duration-300 ${
+                                  isHov ? "translate-x-1.5 opacity-100" : "opacity-20"
+                                }`}>
+                                  →
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+              </div>
+            );
+          })}
+        </div>
 
       </div>
     </section>

@@ -248,21 +248,23 @@ export function FullSizeScrollerStepper() {
         {/* Fullscreen Background Images Layer */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#000000]">
           
-          {/* Card 1 (Base Layer: Model on LEFT in full vibrant color from the start) */}
+          {/* Card 1 — Girl left-of-center, text on right */}
           <div className="absolute inset-0 w-full h-full overflow-hidden">
             <Image
               src={DRESSES[0].image}
               alt={DRESSES[0].alt}
               fill
               priority
-              className="object-cover object-center brightness-[0.90] contrast-[1.02]"
+              className="object-cover object-[30%_20%] md:object-center brightness-[0.90] contrast-[1.02]"
             />
             <div className="absolute inset-0 bg-black/20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-full md:w-3/5 bg-gradient-to-l from-black/75 via-black/35 to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
+            {/* Mobile: strong bottom gradient so text area is readable */}
+            <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none md:hidden" />
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none hidden md:block" />
           </div>
 
-          {/* Card 2 (Unmasks from Right: Model on RIGHT, interior on LEFT) */}
+          {/* Card 2 — Girl slightly right, text on left */}
           <motion.div
             style={{ clipPath: clipPath2 }}
             className="absolute inset-0 w-full h-full will-change-[clip-path]"
@@ -276,15 +278,16 @@ export function FullSizeScrollerStepper() {
                 alt={DRESSES[1].alt}
                 fill
                 priority
-                className="object-cover object-center"
+                className="object-cover object-[62%_20%] md:object-center"
               />
               <div className="absolute inset-0 bg-black/20 pointer-events-none" />
               <div className="absolute inset-y-0 left-0 w-full md:w-3/5 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none md:hidden" />
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none hidden md:block" />
             </motion.div>
           </motion.div>
 
-          {/* Card 3 (Unmasks from Right: Model on LEFT, opulent interior on RIGHT) */}
+          {/* Card 3 — Girl slightly left, text on right */}
           <motion.div
             style={{ clipPath: clipPath3 }}
             className="absolute inset-0 w-full h-full will-change-[clip-path]"
@@ -298,19 +301,18 @@ export function FullSizeScrollerStepper() {
                 alt={DRESSES[2].alt}
                 fill
                 priority
-                className="object-cover object-center"
+                className="object-cover object-[38%_20%] md:object-center"
               />
               <div className="absolute inset-0 bg-black/20 pointer-events-none" />
               <div className="absolute inset-y-0 right-0 w-full md:w-3/5 bg-gradient-to-l from-black/80 via-black/40 to-transparent pointer-events-none" />
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none md:hidden" />
+              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none hidden md:block" />
             </motion.div>
           </motion.div>
 
         </div>
 
-        {/* ------------------------------------------------------------- */}
-        {/* TEXT LAYER 1: AURA NOCTURNE (Right side, model on Left)        */}
-        {/* ------------------------------------------------------------- */}
+        {/* TEXT 1: AURA NOCTURNE — bottom-half on mobile, right side desktop */}
         <motion.div
           style={{
             opacity: text1Opacity,
@@ -319,55 +321,56 @@ export function FullSizeScrollerStepper() {
             pointerEvents: text1Pointer,
             display: text1Display,
           }}
-          className="absolute inset-y-0 right-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20 flex items-center justify-start pl-6 sm:pl-10 md:pl-12 lg:pl-14 pr-6 sm:pr-10"
+          className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
+            flex items-end md:items-center
+            justify-start
+            px-5 pr-7 pb-20 md:pb-0
+            md:pl-12 lg:pl-14 md:pr-10"
         >
-          <div className="max-w-lg lg:max-w-xl xl:max-w-2xl w-full space-y-5 sm:space-y-6 text-left pt-20 sm:pt-14 md:pt-0 -translate-y-2 sm:-translate-y-6 md:-translate-y-8">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:-translate-y-8">
             <div className="flex items-center space-x-3 opacity-90">
-              <span className="font-mono text-xs sm:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
+              <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[0].categoryUA : DRESSES[0].categoryEN}
               </span>
             </div>
 
-            <div className="space-y-1.5 sm:space-y-2">
-              <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-light text-[#F3EEE6] tracking-[0.1em] uppercase leading-none drop-shadow-2xl whitespace-nowrap">
+            <div className="space-y-1">
+              <h3 className="font-serif text-2xl md:text-5xl lg:text-6xl xl:text-[4rem] font-light text-[#F3EEE6] tracking-[0.08em] uppercase leading-none drop-shadow-2xl">
                 {DRESSES[0].name}
               </h3>
-              <p className="font-serif italic text-base sm:text-lg lg:text-[1.3rem] text-[#DCC8AA] font-light tracking-wide">
+              <p className="font-serif italic text-sm md:text-lg lg:text-[1.3rem] text-[#DCC8AA] font-light tracking-wide">
                 {language === "UA" ? DRESSES[0].subtitleUA : DRESSES[0].subtitleEN}
               </p>
             </div>
 
-            <div className="space-y-3 border-l border-[#C9A063]/40 pl-4 sm:pl-5 py-1">
-              <p className="font-sans text-xs sm:text-sm md:text-[0.96rem] lg:text-[1.02rem] text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
+            <div className="space-y-2 border-l border-[#C9A063]/40 pl-3 md:pl-5 py-1">
+              <p className="font-sans text-[11px] md:text-sm text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
                 {language === "UA" ? DRESSES[0].descriptionUA : DRESSES[0].descriptionEN}
               </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
-                <span className="font-mono text-[11px] sm:text-xs text-[#C9A063] tracking-widest uppercase">
+              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4">
+                <span className="font-mono text-[10px] md:text-xs text-[#C9A063] tracking-widest uppercase">
                   ◆ {language === "UA" ? DRESSES[0].fabricUA : DRESSES[0].fabricEN}
                 </span>
-                <span className="font-mono text-[11px] sm:text-xs text-[#DCC8AA]/70 tracking-wider">
+                <span className="font-mono text-[10px] md:text-xs text-[#DCC8AA]/70 tracking-wider">
                   ◆ {language === "UA" ? DRESSES[0].silhouetteUA : DRESSES[0].silhouetteEN}
                 </span>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center space-x-8">
+            <div className="pt-1 flex items-center space-x-6">
               <button
                 onClick={() => handleOpenModal(DRESSES[0], "order")}
-                className="group relative inline-flex items-center space-x-3 text-xs sm:text-sm uppercase tracking-[0.25em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
+                className="group relative inline-flex items-center space-x-2 text-[11px] md:text-sm uppercase tracking-[0.22em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
               >
                 <span className="font-medium">
                   {language === "UA" ? "Замовити Образ" : "Order Bespoke Piece"}
                 </span>
-                <span className="text-[#C9A063] text-base group-hover:translate-x-1.5 transition-transform duration-300">
-                  →
-                </span>
+                <span className="text-[#C9A063] text-sm group-hover:translate-x-1.5 transition-transform duration-300">→</span>
                 <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C9A063] group-hover:bg-[#F3EEE6] transition-colors" />
               </button>
-
               <button
                 onClick={() => handleOpenModal(DRESSES[0], "details")}
-                className="text-xs uppercase tracking-[0.2em] text-[#DCC8AA]/70 hover:text-[#DCC8AA] transition-colors cursor-pointer font-light hover:underline underline-offset-8 decoration-[#DCC8AA]/40"
+                className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#DCC8AA]/70 hover:text-[#DCC8AA] transition-colors cursor-pointer font-light hover:underline underline-offset-8 decoration-[#DCC8AA]/40"
               >
                 {language === "UA" ? "Деталі Образу" : "View Details"}
               </button>
@@ -375,9 +378,7 @@ export function FullSizeScrollerStepper() {
           </div>
         </motion.div>
 
-        {/* ------------------------------------------------------------- */}
-        {/* TEXT LAYER 2: SOLARIS ECLIPSE (Left side, model on Right)     */}
-        {/* ------------------------------------------------------------- */}
+        {/* TEXT 2: SOLARIS ECLIPSE — bottom-half on mobile, left side desktop */}
         <motion.div
           style={{
             opacity: text2Opacity,
@@ -386,55 +387,56 @@ export function FullSizeScrollerStepper() {
             pointerEvents: text2Pointer,
             display: text2Display,
           }}
-          className="absolute inset-y-0 left-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20 flex items-center justify-end pr-6 sm:pr-10 md:pr-12 lg:pr-14 pl-6 sm:pl-10"
+          className="absolute inset-0 md:inset-y-0 md:left-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
+            flex items-end md:items-center
+            justify-start
+            px-5 pr-7 pb-20 md:pb-0
+            md:pr-12 lg:pr-14 md:pl-10"
         >
-          <div className="max-w-lg lg:max-w-xl xl:max-w-2xl w-full space-y-5 sm:space-y-6 text-left pt-20 sm:pt-14 md:pt-0 -translate-y-2 sm:-translate-y-6 md:-translate-y-8">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:-translate-y-8">
             <div className="flex items-center space-x-3 opacity-90">
-              <span className="font-mono text-xs sm:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
+              <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[1].categoryUA : DRESSES[1].categoryEN}
               </span>
             </div>
 
-            <div className="space-y-1.5 sm:space-y-2">
-              <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-light text-[#F3EEE6] tracking-[0.1em] uppercase leading-none drop-shadow-2xl whitespace-nowrap">
+            <div className="space-y-1">
+              <h3 className="font-serif text-2xl md:text-5xl lg:text-6xl xl:text-[4rem] font-light text-[#F3EEE6] tracking-[0.08em] uppercase leading-none drop-shadow-2xl">
                 {DRESSES[1].name}
               </h3>
-              <p className="font-serif italic text-base sm:text-lg lg:text-[1.3rem] text-[#DCC8AA] font-light tracking-wide">
+              <p className="font-serif italic text-sm md:text-lg lg:text-[1.3rem] text-[#DCC8AA] font-light tracking-wide">
                 {language === "UA" ? DRESSES[1].subtitleUA : DRESSES[1].subtitleEN}
               </p>
             </div>
 
-            <div className="space-y-3 border-l border-[#C9A063]/40 pl-4 sm:pl-5 py-1">
-              <p className="font-sans text-xs sm:text-sm md:text-[0.96rem] lg:text-[1.02rem] text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
+            <div className="space-y-2 border-l border-[#C9A063]/40 pl-3 md:pl-5 py-1">
+              <p className="font-sans text-[11px] md:text-sm text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
                 {language === "UA" ? DRESSES[1].descriptionUA : DRESSES[1].descriptionEN}
               </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
-                <span className="font-mono text-[11px] sm:text-xs text-[#C9A063] tracking-widest uppercase">
+              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4">
+                <span className="font-mono text-[10px] md:text-xs text-[#C9A063] tracking-widest uppercase">
                   ◆ {language === "UA" ? DRESSES[1].fabricUA : DRESSES[1].fabricEN}
                 </span>
-                <span className="font-mono text-[11px] sm:text-xs text-[#DCC8AA]/70 tracking-wider">
+                <span className="font-mono text-[10px] md:text-xs text-[#DCC8AA]/70 tracking-wider">
                   ◆ {language === "UA" ? DRESSES[1].silhouetteUA : DRESSES[1].silhouetteEN}
                 </span>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center space-x-8">
+            <div className="pt-1 flex items-center space-x-6">
               <button
                 onClick={() => handleOpenModal(DRESSES[1], "order")}
-                className="group relative inline-flex items-center space-x-3 text-xs sm:text-sm uppercase tracking-[0.25em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
+                className="group relative inline-flex items-center space-x-2 text-[11px] md:text-sm uppercase tracking-[0.22em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
               >
                 <span className="font-medium">
                   {language === "UA" ? "Замовити Образ" : "Order Bespoke Piece"}
                 </span>
-                <span className="text-[#C9A063] text-base group-hover:translate-x-1.5 transition-transform duration-300">
-                  →
-                </span>
+                <span className="text-[#C9A063] text-sm group-hover:translate-x-1.5 transition-transform duration-300">→</span>
                 <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C9A063] group-hover:bg-[#F3EEE6] transition-colors" />
               </button>
-
               <button
                 onClick={() => handleOpenModal(DRESSES[1], "details")}
-                className="text-xs uppercase tracking-[0.2em] text-[#DCC8AA]/70 hover:text-[#DCC8AA] transition-colors cursor-pointer font-light hover:underline underline-offset-8 decoration-[#DCC8AA]/40"
+                className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#DCC8AA]/70 hover:text-[#DCC8AA] transition-colors cursor-pointer font-light hover:underline underline-offset-8 decoration-[#DCC8AA]/40"
               >
                 {language === "UA" ? "Деталі Образу" : "View Details"}
               </button>
@@ -442,9 +444,7 @@ export function FullSizeScrollerStepper() {
           </div>
         </motion.div>
 
-        {/* ------------------------------------------------------------- */}
-        {/* TEXT LAYER 3: TERRA CONTEMPORANEA (Right side, model on Left) */}
-        {/* ------------------------------------------------------------- */}
+        {/* TEXT 3: TERRA CONTEMPORANEA — bottom-half on mobile, right side desktop */}
         <motion.div
           style={{
             opacity: text3Opacity,
@@ -453,55 +453,56 @@ export function FullSizeScrollerStepper() {
             pointerEvents: text3Pointer,
             display: text3Display,
           }}
-          className="absolute inset-y-0 right-0 w-full md:w-[56%] lg:w-[54%] xl:w-[52%] z-20 flex items-center justify-start pl-6 sm:pl-10 md:pl-12 lg:pl-14 pr-8 sm:pr-12 md:pr-16 lg:pr-24 -translate-x-2 sm:-translate-x-4 md:-translate-x-6"
+          className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[56%] lg:w-[54%] xl:w-[52%] z-20
+            flex items-end md:items-center
+            justify-start
+            px-5 pr-7 pb-20 md:pb-0
+            md:pl-12 lg:pl-14 md:pr-16 lg:pr-24"
         >
-          <div className="max-w-lg lg:max-w-xl xl:max-w-2xl w-full space-y-5 sm:space-y-6 text-left pt-20 sm:pt-14 md:pt-0 -translate-y-2 sm:-translate-y-6 md:-translate-y-8">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:-translate-y-8">
             <div className="flex items-center space-x-3 opacity-90">
-              <span className="font-mono text-xs sm:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
+              <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[2].categoryUA : DRESSES[2].categoryEN}
               </span>
             </div>
 
-            <div className="space-y-1.5 sm:space-y-2">
-              <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[2.65rem] xl:text-[3.15rem] font-light text-[#F3EEE6] tracking-[0.06em] uppercase leading-none drop-shadow-2xl whitespace-nowrap">
+            <div className="space-y-1">
+              <h3 className="font-serif text-xl md:text-4xl lg:text-[2.65rem] xl:text-[3.15rem] font-light text-[#F3EEE6] tracking-[0.06em] uppercase leading-none drop-shadow-2xl">
                 {DRESSES[2].name}
               </h3>
-              <p className="font-serif italic text-base sm:text-lg lg:text-[1.3rem] text-[#DCC8AA] font-light tracking-wide">
+              <p className="font-serif italic text-sm md:text-lg lg:text-[1.3rem] text-[#DCC8AA] font-light tracking-wide">
                 {language === "UA" ? DRESSES[2].subtitleUA : DRESSES[2].subtitleEN}
               </p>
             </div>
 
-            <div className="space-y-3 border-l border-[#C9A063]/40 pl-4 sm:pl-5 py-1">
-              <p className="font-sans text-xs sm:text-sm md:text-[0.96rem] lg:text-[1.02rem] text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
+            <div className="space-y-2 border-l border-[#C9A063]/40 pl-3 md:pl-5 py-1">
+              <p className="font-sans text-[11px] md:text-sm text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
                 {language === "UA" ? DRESSES[2].descriptionUA : DRESSES[2].descriptionEN}
               </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1">
-                <span className="font-mono text-[11px] sm:text-xs text-[#C9A063] tracking-widest uppercase">
+              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4">
+                <span className="font-mono text-[10px] md:text-xs text-[#C9A063] tracking-widest uppercase">
                   ◆ {language === "UA" ? DRESSES[2].fabricUA : DRESSES[2].fabricEN}
                 </span>
-                <span className="font-mono text-[11px] sm:text-xs text-[#DCC8AA]/70 tracking-wider">
+                <span className="font-mono text-[10px] md:text-xs text-[#DCC8AA]/70 tracking-wider">
                   ◆ {language === "UA" ? DRESSES[2].silhouetteUA : DRESSES[2].silhouetteEN}
                 </span>
               </div>
             </div>
 
-            <div className="pt-2 flex items-center space-x-8">
+            <div className="pt-1 flex items-center space-x-6">
               <button
                 onClick={() => handleOpenModal(DRESSES[2], "order")}
-                className="group relative inline-flex items-center space-x-3 text-xs sm:text-sm uppercase tracking-[0.25em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
+                className="group relative inline-flex items-center space-x-2 text-[11px] md:text-sm uppercase tracking-[0.22em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
               >
                 <span className="font-medium">
                   {language === "UA" ? "Замовити Образ" : "Order Bespoke Piece"}
                 </span>
-                <span className="text-[#C9A063] text-base group-hover:translate-x-1.5 transition-transform duration-300">
-                  →
-                </span>
+                <span className="text-[#C9A063] text-sm group-hover:translate-x-1.5 transition-transform duration-300">→</span>
                 <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C9A063] group-hover:bg-[#F3EEE6] transition-colors" />
               </button>
-
               <button
                 onClick={() => handleOpenModal(DRESSES[2], "details")}
-                className="text-xs uppercase tracking-[0.2em] text-[#DCC8AA]/70 hover:text-[#DCC8AA] transition-colors cursor-pointer font-light hover:underline underline-offset-8 decoration-[#DCC8AA]/40"
+                className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#DCC8AA]/70 hover:text-[#DCC8AA] transition-colors cursor-pointer font-light hover:underline underline-offset-8 decoration-[#DCC8AA]/40"
               >
                 {language === "UA" ? "Деталі Образу" : "View Details"}
               </button>
