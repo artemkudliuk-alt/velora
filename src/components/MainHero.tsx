@@ -55,6 +55,7 @@ export function MainHero() {
             muted
             playsInline
             preload="auto"
+            onLoadedData={(e) => e.currentTarget.play().catch(() => {})}
             className="absolute inset-0 w-full h-full object-cover object-[center_top] opacity-85 filter brightness-95 saturate-95 block md:hidden"
           />
           {/* Desktop video */}
@@ -66,6 +67,7 @@ export function MainHero() {
             muted
             playsInline
             preload="auto"
+            onLoadedData={(e) => e.currentTarget.play().catch(() => {})}
             className="absolute inset-0 w-full h-full object-cover opacity-85 filter brightness-95 saturate-95 hidden md:block"
           />
         </motion.div>
