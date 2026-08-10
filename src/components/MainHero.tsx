@@ -61,7 +61,7 @@ export function MainHero() {
           {/* Desktop video */}
           <video
             key="hero-video-desktop"
-            src="/assets/Hero_video.mp4"
+            src="/assets/hero_video.mp4"
             autoPlay
             loop
             muted

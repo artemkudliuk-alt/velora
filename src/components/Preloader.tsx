@@ -28,7 +28,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
   // 2. Preload critical video & sequence frame assets
   useEffect(() => {
     // Preload videos (Desktop & Mobile)
-    const videoPaths = ["/assets/Hero_video.mp4", "/assets/mob_hero_video.mp4"];
+    const videoPaths = ["/assets/hero_video.mp4", "/assets/mob_hero_video.mp4"];
     let loadedVideos = 0;
 
     const checkVideos = () => {
