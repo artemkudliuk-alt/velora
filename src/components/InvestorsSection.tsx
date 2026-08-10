@@ -11,9 +11,9 @@ export function InvestorsSection() {
   const [deckModalOpen, setDeckModalOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({ name: "", fund: "", email: "", phone: "" });
-  const [openItem, setOpenItem] = useState<string | null>("01");
-  const [openRoadmap, setOpenRoadmap] = useState<string | null>("Y1");
-  const [isCardOpen, setIsCardOpen] = useState<boolean>(true);
+  const [openItem, setOpenItem] = useState<string | null>(null);
+  const [openRoadmap, setOpenRoadmap] = useState<string | null>(null);
+  const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
 
   const projectedReturn = Math.round(investmentAmount * 3.1);
   const capacityIncrease = Math.round((investmentAmount / 250000) * 450);

@@ -54,8 +54,8 @@ function Chevron({ open }: { open: boolean }) {
 
 export function AtelierExpansionSection() {
   const { language, t } = useLanguage();
-  // COUTURE open by default
-  const [openGroups, setOpenGroups] = useState<Set<string>>(new Set(["COUTURE"]));
+  // All groups closed by default
+  const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const toggleGroup = (id: string) => {
