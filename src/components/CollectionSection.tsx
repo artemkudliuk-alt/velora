@@ -362,13 +362,13 @@ export function CollectionSection() {
       {/* Product Detail & Bespoke Order Modal */}
       <AnimatePresence>
         {activeItem && (
-          <div className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 select-text overflow-y-auto">
+          <div className="fixed inset-0 z-[150] bg-black/90 backdrop-blur-md flex items-start sm:items-center justify-center p-3 sm:p-6 select-text overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.2 }}
-              className="bg-[#0D0F0A] border border-[#C9A063]/40 rounded-none max-w-5xl w-full p-6 sm:p-8 md:p-10 relative text-[#F3EEE6] shadow-2xl my-8"
+              className="bg-[#0D0F0A] border border-[#C9A063]/40 rounded-none max-w-5xl w-full p-4 sm:p-8 md:p-10 relative text-[#F3EEE6] shadow-2xl my-auto py-6 sm:py-8"
             >
               {/* Modal Top Controls */}
               <div className="absolute top-5 right-5 flex items-center space-x-3 z-20">

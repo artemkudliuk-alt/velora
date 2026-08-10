@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import { RootLayoutHeader } from "@/components/RootLayoutHeader";
 import { MainHero } from "@/components/MainHero";
 import { AboutSection } from "@/components/AboutSection";
@@ -9,10 +11,28 @@ import { InvestorsSection } from "@/components/InvestorsSection";
 import { PhilosophySection } from "@/components/PhilosophySection";
 import { ContactSection } from "@/components/ContactSection";
 import { FooterSection } from "@/components/FooterSection";
+import { Preloader } from "@/components/Preloader";
 
 export default function Home() {
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
+  // Prevent scroll until preloader finishes
+  useEffect(() => {
+    if (!loadingComplete) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [loadingComplete]);
+
   return (
     <main className="min-h-screen bg-[#060803] text-[#F3EEE6] relative selection:bg-[#C9A063] selection:text-[#060803]">
+      {/* Preloader */}
+      {!loadingComplete && (
+        <Preloader onComplete={() => setLoadingComplete(true)} />
+      )}
+
       {/* Header Overlay */}
       <RootLayoutHeader />
 
@@ -45,3 +65,6 @@ export default function Home() {
     </main>
   );
 }
+
+
+

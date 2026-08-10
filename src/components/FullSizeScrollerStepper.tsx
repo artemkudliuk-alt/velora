@@ -248,14 +248,23 @@ export function FullSizeScrollerStepper() {
         {/* Fullscreen Background Images Layer */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#000000]">
           
-          {/* Card 1 — Girl left-of-center, text on right */}
+          {/* Card 1 — Mobile vertical portrait / Desktop horizontal landscape */}
           <div className="absolute inset-0 w-full h-full overflow-hidden">
+            {/* Mobile Vertical Photo */}
+            <Image
+              src="/assets/stepper/3screen_1_mob.jpg"
+              alt={DRESSES[0].alt}
+              fill
+              priority
+              className="object-cover object-center brightness-[0.90] contrast-[1.02] block md:hidden"
+            />
+            {/* Desktop Horizontal Photo */}
             <Image
               src={DRESSES[0].image}
               alt={DRESSES[0].alt}
               fill
               priority
-              className="object-cover object-[30%_20%] md:object-center brightness-[0.90] contrast-[1.02]"
+              className="object-cover object-[28.3%_15%] brightness-[0.90] contrast-[1.02] hidden md:block"
             />
             <div className="absolute inset-0 bg-black/20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-full md:w-3/5 bg-gradient-to-l from-black/75 via-black/35 to-transparent pointer-events-none" />
@@ -264,7 +273,7 @@ export function FullSizeScrollerStepper() {
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent pointer-events-none hidden md:block" />
           </div>
 
-          {/* Card 2 — Girl slightly right, text on left */}
+          {/* Card 2 — Mobile vertical portrait / Desktop horizontal landscape */}
           <motion.div
             style={{ clipPath: clipPath2 }}
             className="absolute inset-0 w-full h-full will-change-[clip-path]"
@@ -273,12 +282,21 @@ export function FullSizeScrollerStepper() {
               style={{ scale: scale2, filter: filter2 }}
               className="relative w-full h-full will-change-transform"
             >
+              {/* Mobile Vertical Photo */}
+              <Image
+                src="/assets/stepper/3screen_2_mob.jpg"
+                alt={DRESSES[1].alt}
+                fill
+                priority
+                className="object-cover object-center block md:hidden"
+              />
+              {/* Desktop Horizontal Photo */}
               <Image
                 src={DRESSES[1].image}
                 alt={DRESSES[1].alt}
                 fill
                 priority
-                className="object-cover object-[62%_20%] md:object-center"
+                className="object-cover object-[55.5%_15%] hidden md:block"
               />
               <div className="absolute inset-0 bg-black/20 pointer-events-none" />
               <div className="absolute inset-y-0 left-0 w-full md:w-3/5 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
@@ -287,7 +305,7 @@ export function FullSizeScrollerStepper() {
             </motion.div>
           </motion.div>
 
-          {/* Card 3 — Girl slightly left, text on right */}
+          {/* Card 3 — Mobile vertical portrait / Desktop horizontal landscape */}
           <motion.div
             style={{ clipPath: clipPath3 }}
             className="absolute inset-0 w-full h-full will-change-[clip-path]"
@@ -296,12 +314,21 @@ export function FullSizeScrollerStepper() {
               style={{ scale: scale3, filter: filter3 }}
               className="relative w-full h-full will-change-transform"
             >
+              {/* Mobile Vertical Photo */}
+              <Image
+                src="/assets/stepper/3screen_3_mob.jpg"
+                alt={DRESSES[2].alt}
+                fill
+                priority
+                className="object-cover object-center block md:hidden"
+              />
+              {/* Desktop Horizontal Photo */}
               <Image
                 src={DRESSES[2].image}
                 alt={DRESSES[2].alt}
                 fill
                 priority
-                className="object-cover object-[38%_20%] md:object-center"
+                className="object-cover object-[55.2%_15%] hidden md:block"
               />
               <div className="absolute inset-0 bg-black/20 pointer-events-none" />
               <div className="absolute inset-y-0 right-0 w-full md:w-3/5 bg-gradient-to-l from-black/80 via-black/40 to-transparent pointer-events-none" />
@@ -312,7 +339,7 @@ export function FullSizeScrollerStepper() {
 
         </div>
 
-        {/* TEXT 1: AURA NOCTURNE — bottom-half on mobile, right side desktop */}
+        {/* TEXT 1: AURA NOCTURNE — raised higher on mobile */}
         <motion.div
           style={{
             opacity: text1Opacity,
@@ -324,10 +351,10 @@ export function FullSizeScrollerStepper() {
           className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
             flex items-end md:items-center
             justify-start
-            px-5 pr-7 pb-20 md:pb-0
+            px-5 pr-6 pb-28 sm:pb-32 md:pb-0
             md:pl-12 lg:pl-14 md:pr-10"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:-translate-y-8">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8">
             <div className="flex items-center space-x-3 opacity-90">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[0].categoryUA : DRESSES[0].categoryEN}
@@ -378,7 +405,7 @@ export function FullSizeScrollerStepper() {
           </div>
         </motion.div>
 
-        {/* TEXT 2: SOLARIS ECLIPSE — bottom-half on mobile, left side desktop */}
+        {/* TEXT 2: SOLARIS ECLIPSE — raised higher on mobile */}
         <motion.div
           style={{
             opacity: text2Opacity,
@@ -390,10 +417,10 @@ export function FullSizeScrollerStepper() {
           className="absolute inset-0 md:inset-y-0 md:left-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
             flex items-end md:items-center
             justify-start
-            px-5 pr-7 pb-20 md:pb-0
+            px-5 pr-6 pb-28 sm:pb-32 md:pb-0
             md:pr-12 lg:pr-14 md:pl-10"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:-translate-y-8">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8">
             <div className="flex items-center space-x-3 opacity-90">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[1].categoryUA : DRESSES[1].categoryEN}
@@ -444,7 +471,7 @@ export function FullSizeScrollerStepper() {
           </div>
         </motion.div>
 
-        {/* TEXT 3: TERRA CONTEMPORANEA — bottom-half on mobile, right side desktop */}
+        {/* TEXT 3: TERRA CONTEMPORANEA — raised higher on mobile */}
         <motion.div
           style={{
             opacity: text3Opacity,
@@ -456,10 +483,10 @@ export function FullSizeScrollerStepper() {
           className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[56%] lg:w-[54%] xl:w-[52%] z-20
             flex items-end md:items-center
             justify-start
-            px-5 pr-7 pb-20 md:pb-0
+            px-5 pr-6 pb-28 sm:pb-32 md:pb-0
             md:pl-12 lg:pl-14 md:pr-16 lg:pr-24"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:-translate-y-8">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8">
             <div className="flex items-center space-x-3 opacity-90">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[2].categoryUA : DRESSES[2].categoryEN}
@@ -523,12 +550,27 @@ export function FullSizeScrollerStepper() {
             >
               {/* Previous Image */}
               <div className="absolute inset-0 w-full h-full">
+                {/* Mobile Previous Image */}
+                <Image
+                  src={
+                    crossfadeFrom === 0
+                      ? "/assets/stepper/3screen_1_mob.jpg"
+                      : crossfadeFrom === 1
+                      ? "/assets/stepper/3screen_2_mob.jpg"
+                      : "/assets/stepper/3screen_3_mob.jpg"
+                  }
+                  alt={DRESSES[crossfadeFrom].alt}
+                  fill
+                  priority
+                  className="object-cover object-center brightness-[0.90] contrast-[1.02] block md:hidden"
+                />
+                {/* Desktop Previous Image */}
                 <Image
                   src={DRESSES[crossfadeFrom].image}
                   alt={DRESSES[crossfadeFrom].alt}
                   fill
                   priority
-                  className="object-cover object-center brightness-[0.90] contrast-[1.02]"
+                  className="object-cover object-center brightness-[0.90] contrast-[1.02] hidden md:block"
                 />
                 <div className="absolute inset-0 bg-black/20" />
                 <div
@@ -629,8 +671,8 @@ export function FullSizeScrollerStepper() {
 
       {/* Interactive Modal: Order / Details */}
       {selectedDress && (
-        <div className="fixed inset-0 z-[120] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 select-text">
-          <div className="bg-[#000000] border border-[#C9A063]/30 rounded-2xl max-w-2xl w-full p-6 sm:p-8 md:p-10 relative animate-in zoom-in-95 duration-200 text-[#F3EEE6] shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[120] bg-black/85 backdrop-blur-md flex items-start sm:items-center justify-center p-3 sm:p-6 select-text overflow-y-auto">
+          <div className="bg-[#000000] border border-[#C9A063]/30 rounded-2xl max-w-2xl w-full p-5 sm:p-8 md:p-10 relative animate-in zoom-in-95 duration-200 text-[#F3EEE6] shadow-2xl my-auto py-6 sm:py-8 max-h-none sm:max-h-[90vh]">
             
             {/* Close Button */}
             <button

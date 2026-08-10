@@ -1,8 +1,23 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+
+const menuStagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.055, delayChildren: 0.12 } },
+};
+const menuItem: Variants = {
+  hidden: { opacity: 0, y: 22, filter: "blur(5px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  },
+};
 
 export function RootLayoutHeader() {
   const { t } = useLanguage();
@@ -61,8 +76,15 @@ export function RootLayoutHeader() {
         {/* Top Left - Logo (Adapts filter for dark background contrast on light section) */}
         <a
           href="/"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          className={`transition-all duration-500 transform ${
+          onClick={(e) => {
+            e.preventDefault();
+            if (window.location.pathname === "/" && window.scrollY === 0) {
+              window.location.reload();
+            } else {
+              window.location.href = "/";
+            }
+          }}
+          className={`transition-all duration-500 transform cursor-pointer ${
             showNav ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
           }`}
           title="VELORA"
@@ -85,20 +107,28 @@ export function RootLayoutHeader() {
           {/* MENU Button */}
           <button
             onClick={() => setMenuOpen(true)}
-            className={`w-[140px] h-[52px] sm:w-[170px] sm:h-[62px] backdrop-blur-md font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-500 cursor-pointer flex items-center justify-center rounded-none shadow-lg select-none ${
+            className={`w-[140px] h-[52px] sm:w-[170px] sm:h-[62px] font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-500 cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden ${
               isLightSection
-                ? "bg-[#1C1A17] text-[#C9A063] border border-[#C9A063]/50 hover:bg-[#2b2723]"
-                : "bg-[#141210]/70 text-[#DCC8AA] hover:text-[#C9A063] hover:bg-[#141210]/90 border border-[#2b2723]/60"
+                ? "liquid-glass-light text-[#1C1A17] hover:border-[#A87B3F]/70"
+                : "liquid-glass-heavy text-[#DCC8AA] hover:text-[#C9A063]"
             }`}
           >
-            {t("menu")}
+            <span className="relative z-10">{t("menu")}</span>
           </button>
         </div>
       </header>
 
       {/* Fullscreen Menu Overlay - Dark Theme (Impeccable Design) */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-[100] bg-[#060803] text-[#F3EEE6] p-6 sm:p-10 md:p-14 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-300">
+      <AnimatePresence>
+        {menuOpen && (
+        <motion.div
+          key="menu-overlay"
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[100] bg-[#060803] text-[#F3EEE6] p-6 sm:p-10 md:p-14 flex flex-col justify-between overflow-y-auto"
+        >
           
           {/* Top Header Row */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#C9A063]/20 pb-6">
@@ -106,9 +136,9 @@ export function RootLayoutHeader() {
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setMenuOpen(false)}
-                className="w-[130px] h-[48px] sm:w-[140px] sm:h-[52px] bg-transparent hover:bg-[#DCC8AA]/10 text-[#DCC8AA] hover:text-[#C9A063] font-serif text-xs sm:text-sm font-normal tracking-[0.2em] uppercase transition-colors cursor-pointer flex items-center justify-center rounded-none border border-[#DCC8AA]/30 select-none"
+                className="w-[130px] h-[48px] sm:w-[140px] sm:h-[52px] liquid-glass-heavy text-[#DCC8AA] hover:text-[#C9A063] font-serif text-xs sm:text-sm font-normal tracking-[0.2em] uppercase transition-colors cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden"
               >
-                {t("close")}
+                <span className="relative z-10">{t("close")}</span>
               </button>
 
               <LanguageSwitcher />
@@ -124,11 +154,17 @@ export function RootLayoutHeader() {
             </div>
           </div>
 
-          {/* Main Middle Navigation Links with Restored 2-Line Sliding Hover Animation */}
-          <div className="my-auto py-6 space-y-3 sm:space-y-4 max-w-5xl">
+          {/* Main Middle Navigation Links — Staggered blur-up entrance */}
+          <motion.div
+            className="my-auto py-6 space-y-3 sm:space-y-4 max-w-5xl"
+            variants={menuStagger}
+            initial="hidden"
+            animate="visible"
+          >
             {menuItems.map((item, idx) => (
-              <div
+              <motion.div
                 key={idx}
+                variants={menuItem}
                 className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
               >
                 {/* Roman Numeral */}
@@ -136,11 +172,14 @@ export function RootLayoutHeader() {
                   {item.roman}
                 </span>
 
+                {/* Gold line accent */}
+                <span className="h-[1px] w-0 group-hover:w-5 bg-[#C9A063]/50 transition-all duration-300 hidden sm:block" />
+
                 {/* Clean Luxury Hover Text Link */}
                 <a
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href, idx)}
-                  className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif tracking-tight transition-colors duration-300 whitespace-normal sm:whitespace-nowrap ${
+                  className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif tracking-tight transition-colors duration-300 whitespace-normal sm:whitespace-nowrap nav-link-underline ${
                     idx === activeItem
                       ? "text-[#C9A063] font-medium"
                       : "text-[#F3EEE6] hover:text-[#C9A063]"
@@ -148,9 +187,9 @@ export function RootLayoutHeader() {
                 >
                   {item.label}
                 </a>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Bottom Right - Footer Sublinks */}
           <div className="pt-6 border-t border-[#C9A063]/20 flex flex-col sm:flex-row justify-between items-center gap-4 font-sans text-xs text-[#DCC8AA]/70 uppercase tracking-wider">
@@ -173,8 +212,9 @@ export function RootLayoutHeader() {
             </div>
           </div>
 
-        </div>
-      )}
+        </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

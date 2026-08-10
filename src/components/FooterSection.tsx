@@ -31,8 +31,15 @@ export function FooterSection() {
         <AnimateOnScroll preset="fadeUp" className="flex flex-col items-center space-y-3">
           <a
             href="/"
-            onClick={(e) => { e.preventDefault(); window.location.href = "/"; }}
-            className="inline-block group"
+            onClick={(e) => {
+              e.preventDefault();
+              if (window.location.pathname === "/" && window.scrollY === 0) {
+                window.location.reload();
+              } else {
+                window.location.href = "/";
+              }
+            }}
+            className="inline-block group cursor-pointer"
             title="VÉLORA Haute Couture"
           >
             <img

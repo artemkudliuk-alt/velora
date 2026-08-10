@@ -85,7 +85,14 @@ export function MainHero() {
         <div>
           <a
             href="/"
-            onClick={(e) => { e.preventDefault(); window.location.href = "/"; }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (window.location.pathname === "/" && window.scrollY === 0) {
+                window.location.reload();
+              } else {
+                window.location.href = "/";
+              }
+            }}
             className="cursor-pointer group select-none block"
             title="VÉLORA Haute Couture"
           >
@@ -125,8 +132,8 @@ export function MainHero() {
 
       {/* Interactive Catalog Request Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-[100] bg-[#0D0D0D]/85 backdrop-blur-md flex items-center justify-center p-6">
-          <div className="bg-[#0D0D0D] border border-[#DCC8AA]/20 rounded-none max-w-lg w-full p-8 md:p-10 space-y-6 relative animate-in zoom-in-95 duration-200 text-[#F3EEE6] shadow-2xl">
+        <div className="fixed inset-0 z-[100] bg-[#0D0D0D]/85 backdrop-blur-md flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <div className="bg-[#0D0D0D] border border-[#DCC8AA]/20 rounded-none max-w-lg w-full p-6 md:p-10 space-y-6 relative animate-in zoom-in-95 duration-200 text-[#F3EEE6] shadow-2xl my-auto py-8">
             <button
               onClick={() => setModalOpen(false)}
               className="absolute top-6 right-6 text-[#7A7A7A] hover:text-[#C9A063] text-xl transition-colors cursor-pointer"
