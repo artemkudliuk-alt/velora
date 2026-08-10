@@ -122,7 +122,7 @@ export function InvestorsSection() {
         </ParallaxReveal>
 
         {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch max-w-[1600px] mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start max-w-[1600px] mx-auto w-full">
 
           {/* LEFT: Financial Calculator */}
           <AnimateOnScroll preset="slideInLeft" className="lg:col-span-6 flex flex-col">
@@ -208,7 +208,9 @@ export function InvestorsSection() {
 
           {/* RIGHT: Why Invest — collapsible card */}
           <AnimateOnScroll preset="slideInRight" delay={0.15} className="lg:col-span-6 flex flex-col">
-            <div className="bg-[#060803]/85 backdrop-blur-md border border-[#C9A063]/40 p-6 sm:p-10 rounded-none shadow-2xl h-full animated-gold-border flex flex-col">
+            <div className={`bg-[#060803]/85 backdrop-blur-md border border-[#C9A063]/40 p-6 sm:p-10 rounded-none shadow-2xl animated-gold-border flex flex-col transition-all duration-300 ${
+              isCardOpen ? "h-full justify-between" : "h-auto"
+            }`}>
 
               {/* ── Collapsible header ── */}
               <motion.button
