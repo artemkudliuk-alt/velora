@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ParallaxReveal } from "@/components/AnimateOnScroll";
 import { useLanguage } from "@/context/LanguageContext";
@@ -185,6 +186,19 @@ export function AtelierExpansionSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Centered "Open Full Archive Page" Button — placed below list, 2x smaller */}
+        <div className="pt-6 sm:pt-8 flex justify-center">
+          <Link
+            href="/catalog"
+            className="group relative inline-flex items-center space-x-2.5 px-5 py-2.5 bg-transparent border border-[#C9A063]/60 text-[#F3EEE6] hover:bg-[#C9A063] hover:text-[#060803] transition-all duration-300 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold rounded-none cursor-pointer shadow-md luxury-shimmer-btn"
+          >
+            <span>{language === "UA" ? "Відкрити Повний Каталог" : "Open Full Archive Page"}</span>
+            <span className="text-[#C9A063] group-hover:text-[#060803] group-hover:translate-x-1.5 transition-transform duration-300">
+              →
+            </span>
+          </Link>
         </div>
 
       </div>

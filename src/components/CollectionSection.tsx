@@ -356,18 +356,6 @@ export function CollectionSection() {
           })}
         </div>
 
-        {/* Centered "View Full Archive" Button */}
-        <div className="pt-8 flex justify-center">
-          <Link
-            href="/catalog"
-            className="group relative inline-flex items-center space-x-4 px-10 py-5 bg-transparent border border-[#C9A063] text-[#F3EEE6] hover:bg-[#C9A063] hover:text-[#060803] transition-all duration-300 font-mono text-xs uppercase tracking-[0.3em] font-semibold rounded-none cursor-pointer shadow-lg luxury-shimmer-btn"
-          >
-            <span>{language === "UA" ? "Відкрити Повний Каталог" : "Open Full Archive Page"}</span>
-            <span className="text-[#C9A063] group-hover:text-[#060803] group-hover:translate-x-3 transition-transform duration-300">
-              →
-            </span>
-          </Link>
-        </div>
 
       </div>
 
