@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronIcon } from "./icons";
 import { useLanguage } from "@/context/LanguageContext";
@@ -13,9 +14,20 @@ export function MainHero() {
 
   // Use window scrollY directly so scroll values are absolute and never reset when the section leaves the viewport
   const { scrollY } = useScroll();
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Continuous narrowing of video from top (0px) to 600px of scroll
-  const paddingInline = useTransform(scrollY, [0, 600], ["0%", "18%"], { clamp: true });
+  useEffect(() => {
+    setMounted(true);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Continuous narrowing of video from top (0px) to 600px of scroll — Desktop only
+  const paddingInlineDesktop = useTransform(scrollY, [0, 600], ["0%", "18%"], { clamp: true });
+  const paddingInline = useTransform(paddingInlineDesktop, (v) => (isMobile ? "0%" : v));
   const borderRadius = "0px";
 
   // Opacity & Scale of center content (logo + request button fade out cleanly in first 50px of scroll)
@@ -30,7 +42,7 @@ export function MainHero() {
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] overflow-hidden flex flex-col items-center justify-center bg-[#060803]">
+    <section className="relative w-full h-[100dvh] sm:h-screen min-h-[600px] sm:min-h-[700px] overflow-hidden flex flex-col items-center justify-center bg-[#060803]">
       
       {/* Hero Video Background with continuous side narrowing across entire scroll */}
       <motion.div
@@ -132,29 +144,39 @@ export function MainHero() {
         </div>
       </motion.div>
 
-      {/* Interactive Catalog Request Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-[100] bg-[#0D0D0D]/85 backdrop-blur-md flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto">
-          <div className="bg-[#0D0D0D] border border-[#DCC8AA]/20 rounded-none max-w-lg w-full p-6 md:p-10 space-y-6 relative animate-in zoom-in-95 duration-200 text-[#F3EEE6] shadow-2xl my-auto py-8">
+      {/* Interactive Catalog Request Modal (Portal to document.body for exact viewport centering) */}
+      {modalOpen && mounted && createPortal(
+        <div 
+          onClick={() => setModalOpen(false)}
+          className="fixed inset-0 z-[9999] bg-[#0D0D0D]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#0D0D0D] border border-[#C9A063]/30 rounded-none w-[calc(100%-2rem)] max-w-md p-5 sm:p-8 space-y-5 relative text-[#F3EEE6] shadow-[0_10px_40px_rgba(0,0,0,0.8)] m-auto box-border"
+          >
+            {/* Prominent Luxury Close Cross Button */}
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-6 right-6 text-[#7A7A7A] hover:text-[#C9A063] text-xl transition-colors cursor-pointer"
+              aria-label="Close modal"
+              className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center bg-[#060803] border border-[#C9A063]/30 hover:border-[#C9A063] text-[#DCC8AA] hover:text-[#C9A063] transition-all cursor-pointer z-20 group select-none"
             >
-              ✕
+              <svg className="w-4 h-4 transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
 
-            <span className="font-sans text-xs sm:text-sm uppercase tracking-[0.3em] text-[#C9A063] block font-semibold">
+            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#C9A063] block font-semibold pr-8">
               {language === "UA" ? "КОЛЕКЦІЯ АТЕЛЬЄ VÉLORA" : "VÉLORA Atelier Collection"}
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-light text-[#F3EEE6] uppercase">
+            <h3 className="font-serif text-xl sm:text-2xl font-light text-[#F3EEE6] uppercase tracking-wide pr-6">
               {t("catalogTitle")}
             </h3>
-            <p className="font-sans text-sm text-[#DCC8AA]/80 leading-relaxed">
+            <p className="font-sans text-xs sm:text-sm text-[#DCC8AA]/80 leading-relaxed break-words">
               {t("catalogDesc")}
             </p>
 
             {submitted ? (
-              <div className="p-4 bg-[#0D0D0D] border border-[#C9A063]/40 text-xs sm:text-sm text-[#C9A063] tracking-wider uppercase font-sans font-medium">
+              <div className="p-4 bg-[#060803] border border-[#C9A063]/40 text-xs sm:text-sm text-[#C9A063] tracking-wider uppercase font-sans font-medium text-center">
                 {language === "UA" 
                   ? "✓ Дякуємо! Каталог VÉLORA надіслано на вашу електронну пошту."
                   : "✓ Thank you! The VÉLORA catalog has been sent to your email."}
@@ -167,18 +189,19 @@ export function MainHero() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={language === "UA" ? "Введіть вашу електронну пошту" : "Enter your email address"}
                   required
-                  className="w-full bg-[#060803] border border-[#DCC8AA]/30 px-5 py-3.5 text-sm text-[#F3EEE6] placeholder-[#7A7A7A] focus:outline-none focus:border-[#C9A063] font-sans"
+                  className="w-full bg-[#060803] border border-[#DCC8AA]/30 px-4 py-3.5 text-sm text-[#F3EEE6] placeholder-[#7A7A7A] focus:outline-none focus:border-[#C9A063] font-sans box-border"
                 />
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#C9A063] text-[#060803] font-serif text-sm uppercase tracking-[0.2em] hover:bg-[#DCC8AA] transition-colors font-semibold cursor-pointer"
+                  className="w-full py-4 bg-[#C9A063] text-[#060803] font-serif text-sm uppercase tracking-[0.2em] hover:bg-[#DCC8AA] transition-colors font-semibold cursor-pointer select-none"
                 >
                   {t("sendRequest")}
                 </button>
               </form>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );

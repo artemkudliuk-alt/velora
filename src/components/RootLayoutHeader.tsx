@@ -21,7 +21,8 @@ const menuItem: Variants = {
 
 export function RootLayoutHeader() {
   const { t } = useLanguage();
-  const [showNav, setShowNav] = useState(false);
+  // Header logo & MENU button are permanently visible across all screens and scroll directions
+  const [showNav] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
   const [isLightSection, setIsLightSection] = useState(false);
@@ -37,20 +38,20 @@ export function RootLayoutHeader() {
     { roman: "VIII.", label: t("appointments"), href: "#contact" },
   ];
 
+  // 2. Off-main-thread IntersectionObserver for Philosophy Light Section detection (Zero layout thrashing on Android)
   useEffect(() => {
-    const handleScroll = () => {
-      setShowNav(window.scrollY > 180);
+    const philosophyEl = document.getElementById("philosophy");
+    if (!philosophyEl) return;
 
-      // Detect if user is over the light Philosophy section
-      const philosophyEl = document.getElementById("philosophy");
-      if (philosophyEl) {
-        const rect = philosophyEl.getBoundingClientRect();
-        // Check if Philosophy section is currently occupying top header area
-        setIsLightSection(rect.top <= 100 && rect.bottom >= 100);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsLightSection(entry.isIntersecting);
+      },
+      { rootMargin: "-60px 0px -75% 0px", threshold: 0 }
+    );
+
+    observer.observe(philosophyEl);
+    return () => observer.disconnect();
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, idx: number) => {
@@ -72,7 +73,10 @@ export function RootLayoutHeader() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 px-6 sm:px-12 py-6 flex justify-between items-center pointer-events-none bg-transparent">
+      <header 
+        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, contain: "layout style" }}
+        className="w-full px-4 sm:px-12 py-3 sm:py-6 flex justify-between items-center pointer-events-none bg-transparent select-none"
+      >
         {/* Top Left - Logo (Adapts filter for dark background contrast on light section) */}
         <a
           href="/"
@@ -84,15 +88,13 @@ export function RootLayoutHeader() {
               window.location.href = "/";
             }
           }}
-          className={`transition-all duration-500 transform cursor-pointer ${
-            showNav ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
-          }`}
+          className="opacity-100 pointer-events-auto cursor-pointer transition-all duration-300"
           title="VELORA"
         >
           <img
             src="/assets/logo.png"
             alt="VELORA"
-            className={`h-24 sm:h-32 md:h-36 w-auto object-contain transition-all duration-500 ${
+            className={`h-14 sm:h-20 md:h-28 w-auto object-contain transition-all duration-300 ${
               isLightSection
                 ? "filter brightness-0 saturate-100 drop-shadow-[0_2px_8px_rgba(201,160,99,0.3)]"
                 : "filter brightness-110 drop-shadow-xl"
@@ -101,13 +103,11 @@ export function RootLayoutHeader() {
         </a>
 
         {/* Top Right - MENU Button */}
-        <div className={`transition-all duration-500 transform ${
-          showNav ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
-        }`}>
+        <div className="opacity-100 pointer-events-auto transition-all duration-300">
           {/* MENU Button */}
           <button
             onClick={() => setMenuOpen(true)}
-            className={`w-[140px] h-[52px] sm:w-[170px] sm:h-[62px] font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-500 cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden ${
+            className={`w-[110px] h-[44px] sm:w-[170px] sm:h-[62px] font-serif text-sm sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden ${
               isLightSection
                 ? "liquid-glass-light text-[#1C1A17] hover:border-[#A87B3F]/70"
                 : "liquid-glass-heavy text-[#DCC8AA] hover:text-[#C9A063]"
@@ -147,8 +147,11 @@ export function RootLayoutHeader() {
             {/* Top Right - Contact Info */}
             <div className="text-left sm:text-right font-sans text-xs sm:text-sm text-[#DCC8AA]/80 leading-snug">
               <div className="font-semibold uppercase tracking-wider text-xs text-[#C9A063]">{t("conciergeContact")}</div>
-              <div className="font-semibold text-[#F3EEE6] mt-0.5">+1 (800) 835-6721</div>
-              <a href="mailto:concierge@velora-couture.com" className="hover:text-[#C9A063] transition-colors font-medium text-[#DCC8AA] block">
+              <div className="space-y-0.5 mt-0.5">
+                <a href="tel:+380777704178" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+380 7777 04178</a>
+                <a href="tel:+61415779783" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+61415 779 783</a>
+              </div>
+              <a href="mailto:concierge@velora-couture.com" className="hover:text-[#C9A063] transition-colors font-medium text-[#DCC8AA] block mt-1">
                 concierge@velora-couture.com
               </a>
             </div>

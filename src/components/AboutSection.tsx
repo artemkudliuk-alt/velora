@@ -438,6 +438,23 @@ export function AboutSection() {
     };
   }, []);
 
+  const updateCanvasDimensions = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const parent = canvas.parentElement;
+    const targetWidth = parent ? parent.clientWidth : window.innerWidth;
+    const targetHeight = parent ? parent.clientHeight : window.innerHeight;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const displayWidth = Math.round(targetWidth * dpr);
+    const displayHeight = Math.round(targetHeight * dpr);
+
+    if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+      canvas.width = displayWidth;
+      canvas.height = displayHeight;
+    }
+  };
+
   const drawFrame = (frameIndex: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -447,8 +464,10 @@ export function AboutSection() {
     const img = images[frameIndex];
     if (!img || !img.complete || img.naturalWidth === 0) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    updateCanvasDimensions();
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "medium";
 
     const hRatio = canvas.width / img.width;
     const vRatio = canvas.height / img.height;
@@ -482,12 +501,14 @@ export function AboutSection() {
 
   useEffect(() => {
     if (imagesLoaded && images[0]) {
+      updateCanvasDimensions();
       drawFrame(0);
     }
   }, [imagesLoaded]);
 
   useEffect(() => {
     const handleResize = () => {
+      updateCanvasDimensions();
       const frameIndex = Math.min(
         TOTAL_FRAMES - 1,
         Math.max(0, Math.floor(scrollYProgress.get() * (TOTAL_FRAMES - 1)))
@@ -510,7 +531,7 @@ export function AboutSection() {
       className="relative z-20 w-full h-[350vh] bg-[#060803] text-[#F3EEE6] shadow-2xl"
     >
       {/* Sticky Fullscreen Canvas Viewport */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden select-none bg-[#060803]">
+      <div className="sticky top-0 h-[100dvh] sm:h-screen w-full overflow-hidden select-none bg-[#060803]">
         
         {/* Render Canvas for 72fps Frame Sequence of Dress on Mannequin */}
         <canvas
