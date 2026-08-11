@@ -348,13 +348,9 @@ export function FullSizeScrollerStepper() {
             pointerEvents: text1Pointer,
             display: text1Display,
           }}
-          className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
-            flex items-end md:items-center
-            justify-start md:justify-end
-            px-5 pr-6 pb-28 sm:pb-32 md:pb-0
-            md:pl-10 md:pr-16 lg:pr-24"
+          className="absolute bottom-28 sm:pb-32 md:pb-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 left-5 right-5 md:left-auto md:right-12 lg:right-20 xl:right-28 w-auto md:w-[48%] lg:w-[44%] xl:w-[42%] z-20 flex flex-col items-start md:items-end text-left md:text-right"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:text-right -translate-y-4 md:-translate-y-8 flex flex-col md:items-end">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 flex flex-col md:items-end">
             <div className="flex items-center space-x-3 opacity-90 justify-start md:justify-end">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[0].categoryUA : DRESSES[0].categoryEN}
@@ -414,13 +410,9 @@ export function FullSizeScrollerStepper() {
             pointerEvents: text2Pointer,
             display: text2Display,
           }}
-          className="absolute inset-0 md:inset-y-0 md:left-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
-            flex items-end md:items-center
-            justify-start
-            px-5 pr-6 pb-28 sm:pb-32 md:pb-0
-            md:pl-16 lg:pl-24 md:pr-10"
+          className="absolute bottom-28 sm:pb-32 md:pb-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 left-5 right-5 md:right-auto md:left-12 lg:left-20 xl:left-28 w-auto md:w-[48%] lg:w-[44%] xl:w-[42%] z-20 flex flex-col items-start text-left"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8 flex flex-col items-start">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 flex flex-col items-start">
             <div className="flex items-center space-x-3 opacity-90 justify-start">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[1].categoryUA : DRESSES[1].categoryEN}
@@ -480,13 +472,9 @@ export function FullSizeScrollerStepper() {
             pointerEvents: text3Pointer,
             display: text3Display,
           }}
-          className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[56%] lg:w-[54%] xl:w-[52%] z-20
-            flex items-end md:items-center
-            justify-start md:justify-end
-            px-5 pr-6 pb-28 sm:pb-32 md:pb-0
-            md:pl-10 md:pr-16 lg:pr-24"
+          className="absolute bottom-28 sm:pb-32 md:pb-0 md:bottom-auto md:top-1/2 md:-translate-y-1/2 left-5 right-5 md:left-auto md:right-12 lg:right-20 xl:right-28 w-auto md:w-[48%] lg:w-[44%] xl:w-[42%] z-20 flex flex-col items-start md:items-end text-left md:text-right"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:text-right -translate-y-4 md:-translate-y-8 flex flex-col md:items-end">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 flex flex-col md:items-end">
             <div className="flex items-center space-x-3 opacity-90 justify-start md:justify-end">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[2].categoryUA : DRESSES[2].categoryEN}
