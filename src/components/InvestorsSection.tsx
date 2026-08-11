@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { createPortal } from "react-[#0D0D0D]" in "react-dom"; // fallback or react-dom import
 import Image from "next/image";
-import { createPortal as createPortalDom } from "react-dom";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { ParallaxReveal, AnimateOnScroll } from "@/components/AnimateOnScroll";
@@ -243,7 +242,7 @@ export function InvestorsSection() {
       </div>
 
       {/* ── MODAL 1: Financial Calculator Popup ───────────────────────────────── */}
-      {calcModalOpen && mounted && createPortalDom(
+      {calcModalOpen && mounted && createPortal(
         <div
           onClick={() => setCalcModalOpen(false)}
           className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
@@ -324,7 +323,7 @@ export function InvestorsSection() {
       )}
 
       {/* ── MODAL 2: Strategic Pillars Popup ──────────────────────────────────── */}
-      {pillarsModalOpen && mounted && createPortalDom(
+      {pillarsModalOpen && mounted && createPortal(
         <div
           onClick={() => setPillarsModalOpen(false)}
           className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
@@ -366,7 +365,7 @@ export function InvestorsSection() {
       )}
 
       {/* ── MODAL 3: 5-Year Roadmap Popup ──────────────────────────────────────── */}
-      {roadmapModalOpen && mounted && createPortalDom(
+      {roadmapModalOpen && mounted && createPortal(
         <div
           onClick={() => setRoadmapModalOpen(false)}
           className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
@@ -391,7 +390,7 @@ export function InvestorsSection() {
               </h3>
             </div>
 
-            <div className="space-y-4 divide-y divide-[#DCC8AA]/15">
+            <div className="space-y-4 divide-[#DCC8AA]/15 divide-y">
               {ROADMAP_ITEMS.map((item) => (
                 <div key={item.id} className="pt-3 space-y-1">
                   <span className="font-mono text-[10px] text-[#C9A063] tracking-[0.25em] uppercase font-semibold block">
@@ -408,7 +407,7 @@ export function InvestorsSection() {
       )}
 
       {/* ── MODAL 4: Confidential Pitch Deck Form ──────────────────────────────── */}
-      {deckModalOpen && mounted && createPortalDom(
+      {deckModalOpen && mounted && createPortal(
         <div
           onClick={() => setDeckModalOpen(false)}
           className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
