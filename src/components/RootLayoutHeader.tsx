@@ -99,10 +99,18 @@ export function RootLayoutHeader() {
   return (
     <>
       <header 
-        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, contain: "layout style" }}
-        className="w-full px-6 sm:px-12 py-4 sm:py-6 flex justify-between items-center pointer-events-none bg-transparent select-none"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          contain: "layout style",
+          display: menuOpen ? "none" : "flex",
+        }}
+        className="w-full px-6 sm:px-12 py-4 sm:py-6 justify-between items-center pointer-events-none bg-transparent select-none"
       >
-        {/* Top Left - Logo (Fades in on Screen 02, doubled size) */}
+        {/* Top Left - Logo */}
         <a
           href="/"
           onClick={(e) => {
@@ -114,7 +122,7 @@ export function RootLayoutHeader() {
             }
           }}
           className={`transition-opacity duration-500 ease-out cursor-pointer ${
-            showNav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            showNav && !menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
           title="VELORA"
         >
@@ -129,11 +137,10 @@ export function RootLayoutHeader() {
           />
         </a>
 
-        {/* Top Right - MENU Button (Fades in on Screen 02) */}
+        {/* Top Right - MENU Button */}
         <div className={`transition-opacity duration-500 ease-out ${
-          showNav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          showNav && !menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}>
-          {/* MENU Button */}
           <button
             onClick={() => setMenuOpen(true)}
             className={`w-[140px] h-[52px] sm:w-[170px] sm:h-[62px] font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden ${
@@ -147,25 +154,25 @@ export function RootLayoutHeader() {
         </div>
       </header>
 
-      {/* Fullscreen Menu Overlay - Dark Theme (Impeccable Design) */}
+      {/* Fullscreen Menu Overlay - Dark Theme (Impeccable Design & Spacing) */}
       <AnimatePresence>
         {menuOpen && (
         <motion.div
           key="menu-overlay"
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] bg-[#060803] text-[#F3EEE6] p-6 sm:p-10 md:p-14 flex flex-col justify-between overflow-y-auto"
+          className="fixed inset-0 z-[10000] bg-[#060803] text-[#F3EEE6] p-6 sm:p-12 md:p-16 lg:p-20 flex flex-col justify-between overflow-y-auto"
         >
           
-          {/* Top Header Row */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#C9A063]/20 pb-6">
+          {/* Top Header Row — Generous Luxury Spacing */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b border-[#C9A063]/25 pb-8 mb-4 sm:mb-8">
             {/* Top Left - CLOSE button & Language Switcher */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <button
                 onClick={() => setMenuOpen(false)}
-                className="w-[130px] h-[48px] sm:w-[140px] sm:h-[52px] liquid-glass-heavy text-[#DCC8AA] hover:text-[#C9A063] font-serif text-xs sm:text-sm font-normal tracking-[0.2em] uppercase transition-colors cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden"
+                className="w-[140px] h-[52px] liquid-glass-heavy text-[#DCC8AA] hover:text-[#C9A063] font-serif text-sm font-normal tracking-[0.2em] uppercase transition-colors cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden"
               >
                 <span className="relative z-10">{t("close")}</span>
               </button>
@@ -174,21 +181,21 @@ export function RootLayoutHeader() {
             </div>
 
             {/* Top Right - Contact Info */}
-            <div className="text-left sm:text-right font-sans text-xs sm:text-sm text-[#DCC8AA]/80 leading-snug">
-              <div className="font-semibold uppercase tracking-wider text-xs text-[#C9A063]">{t("conciergeContact")}</div>
-              <div className="space-y-0.5 mt-0.5">
+            <div className="text-left sm:text-right font-sans text-xs sm:text-sm text-[#DCC8AA]/90 leading-relaxed space-y-1">
+              <div className="font-mono uppercase tracking-[0.25em] text-xs text-[#C9A063] font-semibold">{t("conciergeContact")}</div>
+              <div className="space-y-0.5 font-sans">
                 <a href="tel:+380777704178" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+380 7777 04178</a>
                 <a href="tel:+61415779783" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+61415 779 783</a>
               </div>
-              <a href="mailto:concierge@velora-couture.com" className="hover:text-[#C9A063] transition-colors font-medium text-[#DCC8AA] block mt-1">
+              <a href="mailto:concierge@velora-couture.com" className="hover:text-[#C9A063] transition-colors font-medium text-[#DCC8AA] block pt-0.5">
                 concierge@velora-couture.com
               </a>
             </div>
           </div>
 
-          {/* Main Middle Navigation Links — Staggered blur-up entrance */}
+          {/* Main Middle Navigation Links — Expanded vertical spacing & staggered entrance */}
           <motion.div
-            className="my-auto py-6 space-y-3 sm:space-y-4 max-w-5xl"
+            className="my-auto py-8 sm:py-12 space-y-5 sm:space-y-7 md:space-y-8 max-w-5xl"
             variants={menuStagger}
             initial="hidden"
             animate="visible"
@@ -197,21 +204,21 @@ export function RootLayoutHeader() {
               <motion.div
                 key={idx}
                 variants={menuItem}
-                className="flex items-center gap-4 sm:gap-6 group cursor-pointer"
+                className="flex items-center gap-5 sm:gap-8 group cursor-pointer"
               >
                 {/* Roman Numeral */}
-                <span className="font-sans text-xs sm:text-sm text-[#C9A063] font-semibold w-6 sm:w-8 select-none">
+                <span className="font-mono text-xs sm:text-sm text-[#C9A063] font-semibold w-8 select-none">
                   {item.roman}
                 </span>
 
                 {/* Gold line accent */}
-                <span className="h-[1px] w-0 group-hover:w-5 bg-[#C9A063]/50 transition-all duration-300 hidden sm:block" />
+                <span className="h-[1px] w-0 group-hover:w-6 bg-[#C9A063]/60 transition-all duration-300 hidden sm:block" />
 
                 {/* Clean Luxury Hover Text Link */}
                 <a
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href, idx)}
-                  className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif tracking-tight transition-colors duration-300 whitespace-normal sm:whitespace-nowrap nav-link-underline ${
+                  className={`text-2xl sm:text-4xl md:text-5xl font-serif tracking-[0.05em] uppercase transition-colors duration-300 whitespace-normal sm:whitespace-nowrap nav-link-underline ${
                     idx === activeItem
                       ? "text-[#C9A063] font-medium"
                       : "text-[#F3EEE6] hover:text-[#C9A063]"
@@ -224,8 +231,8 @@ export function RootLayoutHeader() {
           </motion.div>
 
           {/* Bottom Right - Footer Sublinks */}
-          <div className="pt-6 border-t border-[#C9A063]/20 flex flex-col sm:flex-row justify-between items-center gap-4 font-sans text-xs text-[#DCC8AA]/70 uppercase tracking-wider">
-            <div className="text-left">
+          <div className="pt-8 border-t border-[#C9A063]/25 flex flex-col sm:flex-row justify-between items-center gap-4 font-sans text-xs text-[#DCC8AA]/70 uppercase tracking-widest">
+            <div className="text-left font-mono">
               VÉLORA HAUTE COUTURE MAISON • DIRECTORY
             </div>
             <div className="flex items-center space-x-6">
