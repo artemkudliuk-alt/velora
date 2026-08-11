@@ -21,8 +21,7 @@ const menuItem: Variants = {
 
 export function RootLayoutHeader() {
   const { t } = useLanguage();
-  // Header logo & MENU button are permanently visible across all screens and scroll directions
-  const [showNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
   const [isLightSection, setIsLightSection] = useState(false);
@@ -37,6 +36,32 @@ export function RootLayoutHeader() {
     { roman: "VII.", label: t("philosophy"), href: "#philosophy" },
     { roman: "VIII.", label: t("appointments"), href: "#contact" },
   ];
+
+  // 1. Scroll Hysteresis for Header Nav — Fades in on Screen 02 (> 350px) and stays visible 100% of the time down the page
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          setShowNav((prev) => {
+            // Fade in when user reaches Screen 02 (scrolled past 350px)
+            if (!prev && currentY > 350) return true;
+            // Fade out ONLY when user scrolls all the way back to Screen 01 top (< 150px)
+            if (prev && currentY < 150) return false;
+            // Otherwise maintain current state continuously across all scroll directions
+            return prev;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // 2. Off-main-thread IntersectionObserver for Philosophy Light Section detection (Zero layout thrashing on Android)
   useEffect(() => {
@@ -75,9 +100,9 @@ export function RootLayoutHeader() {
     <>
       <header 
         style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, contain: "layout style" }}
-        className="w-full px-4 sm:px-12 py-3 sm:py-6 flex justify-between items-center pointer-events-none bg-transparent select-none"
+        className="w-full px-6 sm:px-12 py-4 sm:py-6 flex justify-between items-center pointer-events-none bg-transparent select-none"
       >
-        {/* Top Left - Logo (Adapts filter for dark background contrast on light section) */}
+        {/* Top Left - Logo (Fades in on Screen 02, doubled size) */}
         <a
           href="/"
           onClick={(e) => {
@@ -88,13 +113,15 @@ export function RootLayoutHeader() {
               window.location.href = "/";
             }
           }}
-          className="opacity-100 pointer-events-auto cursor-pointer transition-all duration-300"
+          className={`transition-opacity duration-500 ease-out cursor-pointer ${
+            showNav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
           title="VELORA"
         >
           <img
             src="/assets/logo.png"
             alt="VELORA"
-            className={`h-14 sm:h-20 md:h-28 w-auto object-contain transition-all duration-300 ${
+            className={`h-24 sm:h-32 md:h-36 w-auto object-contain transition-all duration-300 ${
               isLightSection
                 ? "filter brightness-0 saturate-100 drop-shadow-[0_2px_8px_rgba(201,160,99,0.3)]"
                 : "filter brightness-110 drop-shadow-xl"
@@ -102,12 +129,14 @@ export function RootLayoutHeader() {
           />
         </a>
 
-        {/* Top Right - MENU Button */}
-        <div className="opacity-100 pointer-events-auto transition-all duration-300">
+        {/* Top Right - MENU Button (Fades in on Screen 02) */}
+        <div className={`transition-opacity duration-500 ease-out ${
+          showNav ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}>
           {/* MENU Button */}
           <button
             onClick={() => setMenuOpen(true)}
-            className={`w-[110px] h-[44px] sm:w-[170px] sm:h-[62px] font-serif text-sm sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden ${
+            className={`w-[140px] h-[52px] sm:w-[170px] sm:h-[62px] font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase transition-all duration-300 cursor-pointer flex items-center justify-center rounded-none select-none relative overflow-hidden ${
               isLightSection
                 ? "liquid-glass-light text-[#1C1A17] hover:border-[#A87B3F]/70"
                 : "liquid-glass-heavy text-[#DCC8AA] hover:text-[#C9A063]"
