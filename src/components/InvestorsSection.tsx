@@ -131,10 +131,17 @@ export function InvestorsSection() {
         {/* ── 2. Top Hero Model Editorial Feature (Woman Photo Prominently at Top) ── */}
         <AnimateOnScroll preset="fadeUp" delay={0.1} className="w-full">
           <div className="relative w-full h-[320px] sm:h-[420px] md:h-[480px] border border-[#C9A063]/40 overflow-hidden group shadow-2xl animated-gold-border">
+            {/* Mobile Image (Tailored crop for phone screens) */}
+            <img
+              src="/assets/investors_bg_new.jpg"
+              alt="VÉLORA Haute Couture Model - Investor Relations"
+              className="w-full h-full object-cover object-center filter brightness-105 saturate-105 transition-transform duration-700 group-hover:scale-103 block md:hidden"
+            />
+            {/* Desktop Image */}
             <img
               src="/assets/investors_bg.jpg"
               alt="VÉLORA Haute Couture Model - Investor Relations"
-              className="w-full h-full object-cover object-top filter brightness-105 saturate-105 transition-transform duration-700 group-hover:scale-103"
+              className="w-full h-full object-cover object-top filter brightness-105 saturate-105 transition-transform duration-700 group-hover:scale-103 hidden md:block"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#060803] via-[#060803]/40 to-transparent pointer-events-none" />
             <div className="absolute inset-0 border border-[#C9A063]/30 m-3 pointer-events-none" />
