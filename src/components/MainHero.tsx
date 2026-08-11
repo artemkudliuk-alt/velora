@@ -25,9 +25,13 @@ export function MainHero() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Continuous narrowing of video from top (0px) to 600px of scroll — Desktop only
-  const paddingInlineDesktop = useTransform(scrollY, [0, 600], ["0%", "18%"], { clamp: true });
-  const paddingInline = useTransform(paddingInlineDesktop, (v) => (isMobile ? "0%" : v));
+  // Continuous side narrowing of video from top (0px) to 650px of scroll — Enabled on Mobile & Desktop
+  const paddingInline = useTransform(
+    scrollY,
+    [0, 650],
+    isMobile ? ["0%", "12%"] : ["0%", "20%"],
+    { clamp: true }
+  );
   const borderRadius = "0px";
 
   // Opacity & Scale of center content (logo + request button fade out cleanly in first 50px of scroll)
