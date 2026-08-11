@@ -1,6 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-[#0D0D0D]" in "react-dom"; // fallback or react-dom import
+import Image from "next/image";
+import { createPortal as createPortalDom } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { ParallaxReveal, AnimateOnScroll } from "@/components/AnimateOnScroll";
@@ -9,11 +12,16 @@ export function InvestorsSection() {
   const { language, t } = useLanguage();
   const [investmentAmount, setInvestmentAmount] = useState<number>(250000);
   const [deckModalOpen, setDeckModalOpen] = useState<boolean>(false);
+  const [calcModalOpen, setCalcModalOpen] = useState<boolean>(false);
+  const [pillarsModalOpen, setPillarsModalOpen] = useState<boolean>(false);
+  const [roadmapModalOpen, setRoadmapModalOpen] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({ name: "", fund: "", email: "", phone: "" });
-  const [openItem, setOpenItem] = useState<string | null>(null);
-  const [openRoadmap, setOpenRoadmap] = useState<string | null>(null);
-  const [isCardOpen, setIsCardOpen] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const projectedReturn = Math.round(investmentAmount * 3.1);
   const capacityIncrease = Math.round((investmentAmount / 250000) * 450);
@@ -89,406 +97,386 @@ export function InvestorsSection() {
   return (
     <section
       id="investors"
-      className="relative z-30 w-full min-h-screen py-16 sm:py-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#060803] text-[#F3EEE6] flex flex-col justify-center overflow-hidden"
+      className="relative z-30 w-full min-h-screen py-12 sm:py-20 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#060803] text-[#F3EEE6] flex flex-col justify-center overflow-hidden"
     >
-      {/* Loop Video Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Subtle Loop Video Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40">
         <video
           src="/assets/investors_timelapse.mp4"
           poster="/assets/investors_bg.jpg"
           autoPlay loop muted playsInline
-          className="w-full h-full object-cover opacity-65 sm:opacity-75 filter brightness-105 saturate-105 scale-105"
+          className="w-full h-full object-cover filter brightness-90 saturate-90 scale-105"
         />
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "linear-gradient(180deg, rgba(6,8,3,0.85) 0%, rgba(6,8,3,0.55) 50%, rgba(6,8,3,0.92) 100%)" }}
+          style={{ background: "linear-gradient(180deg, rgba(6,8,3,0.92) 0%, rgba(6,8,3,0.85) 50%, rgba(6,8,3,0.96) 100%)" }}
         />
       </div>
 
-      <div className="max-w-[1700px] mx-auto relative z-10 w-full space-y-10 sm:space-y-12">
+      <div className="max-w-[1300px] mx-auto relative z-10 w-full space-y-8 sm:space-y-10">
 
-        {/* Header */}
-        <ParallaxReveal yOffset={30} duration={0.9} className="text-center space-y-3 max-w-4xl mx-auto">
-          <div className="flex items-center space-x-4 justify-center">
-            <span className="h-[1px] w-12 bg-[#C9A063]/60" />
-            <span className="font-mono text-xs sm:text-sm text-[#C9A063] tracking-[0.35em] uppercase font-semibold">
+        {/* ── 1. Top Section Header ───────────────────────────────────────────── */}
+        <ParallaxReveal yOffset={24} duration={0.8} className="text-center space-y-3 max-w-3xl mx-auto">
+          <div className="flex items-center space-x-3 justify-center">
+            <span className="h-[1px] w-10 bg-[#C9A063]/60" />
+            <span className="font-mono text-xs text-[#C9A063] tracking-[0.3em] uppercase font-semibold">
               {t("investorEyebrow")}
             </span>
-            <span className="h-[1px] w-12 bg-[#C9A063]/60" />
+            <span className="h-[1px] w-10 bg-[#C9A063]/60" />
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl font-light text-[#F3EEE6] tracking-[0.06em] uppercase leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#F3EEE6] tracking-[0.06em] uppercase leading-tight">
             {t("investorTitle")}
           </h2>
         </ParallaxReveal>
 
-        {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start max-w-[1600px] mx-auto w-full">
-
-          {/* LEFT: Financial Calculator */}
-          <AnimateOnScroll preset="slideInLeft" className="lg:col-span-6 flex flex-col">
-            <div className="bg-[#060803]/85 backdrop-blur-md border border-[#C9A063]/40 p-6 sm:p-10 space-y-8 flex flex-col justify-between rounded-none shadow-2xl h-full animated-gold-border">
-              <div className="space-y-6">
-                <div className="border-b border-[#C9A063]/30 pb-4">
-                  <span className="font-mono text-xs sm:text-sm text-[#C9A063] uppercase tracking-[0.3em] block font-semibold">
-                    {language === "UA" ? "ФІНАНСОВЕ МОДЕЛЮВАННЯ" : "FINANCIAL MODELING"}
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl text-[#F3EEE6] uppercase font-light mt-1">
-                    {t("calculatorTitle")}
-                  </h3>
-                </div>
-
-                {/* Slider */}
-                <div className="space-y-4">
-                  <div className="space-y-1">
-                    <span className="font-mono text-xs sm:text-sm text-[#DCC8AA]/80 uppercase tracking-wider font-medium block">
-                      {t("targetCapital")}
-                    </span>
-                    <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#C9A063] font-light block">
-                      ${investmentAmount.toLocaleString()} USD
-                    </span>
-                  </div>
-
-                  <input
-                    type="range" min="50000" max="1000000" step="500"
-                    value={investmentAmount}
-                    onChange={(e) => setInvestmentAmount(Number(e.target.value))}
-                    className="w-full h-2.5 bg-[#060803] border border-[#C9A063]/50 appearance-none cursor-pointer accent-[#C9A063]"
-                  />
-
-                  <div className="flex justify-between font-mono text-xs sm:text-sm text-[#DCC8AA]/80 uppercase tracking-widest">
-                    <span>{language === "UA" ? "$50k Базовий" : "$50k Min Tier"}</span>
-                    <span>{language === "UA" ? "$500k Масштабування" : "$500k Growth"}</span>
-                    <span>{language === "UA" ? "$1M Провідний" : "$1M Lead Tier"}</span>
-                  </div>
-                </div>
+        {/* ── 2. Top Hero Model Editorial Feature (Woman Photo Prominently at Top) ── */}
+        <AnimateOnScroll preset="fadeUp" delay={0.1} className="w-full">
+          <div className="relative w-full h-[320px] sm:h-[420px] md:h-[480px] border border-[#C9A063]/40 overflow-hidden group shadow-2xl animated-gold-border">
+            <img
+              src="/assets/investors_bg.jpg"
+              alt="VÉLORA Haute Couture Model - Investor Relations"
+              className="w-full h-full object-cover object-top filter brightness-105 saturate-105 transition-transform duration-700 group-hover:scale-103"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#060803] via-[#060803]/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 border border-[#C9A063]/30 m-3 pointer-events-none" />
+            
+            {/* Overlay Text on Model Image */}
+            <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-10">
+              <div className="space-y-1 max-w-xl">
+                <span className="font-mono text-[10px] sm:text-xs text-[#C9A063] tracking-[0.3em] uppercase font-semibold block">
+                  {language === "UA" ? "БРЕНД-СПАДЩИНА ТА КАПІТАЛ" : "BRAND EQUITY & CAPITAL HORIZONS"}
+                </span>
+                <h3 className="font-serif text-xl sm:text-3xl text-[#F3EEE6] uppercase font-light leading-snug">
+                  {language === "UA" ? "Інвестиції в Архітектурну Моду VÉLORA" : "Investing in VÉLORA Haute Couture Architecture"}
+                </h3>
               </div>
-
-              {/* 3 Metric Cards */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-[#C9A063]/30">
-
-                <div className="bg-[#0D0F0A]/90 border border-[#C9A063]/30 hover:border-[#C9A063] hover:bg-[#C9A063]/10 p-3 sm:p-5 text-center flex flex-col items-center justify-center gap-1 transition-all duration-300">
-                  <span className="font-mono text-[9px] sm:text-xs text-[#C9A063] uppercase tracking-widest block font-semibold leading-snug">
-                    {language === "UA" ? "3-Річний\nДохід" : "3-Yr\nReturn"}
-                  </span>
-                  <span className="font-serif text-base sm:text-xl md:text-2xl text-[#F3EEE6] block font-light leading-none">
-                    ${projectedReturn.toLocaleString()}
-                  </span>
-                  <span className="font-mono text-[9px] sm:text-xs text-[#DCC8AA]/75 block">
-                    {projectedRoiMultiplier}x ROI
-                  </span>
-                </div>
-
-                <div className="bg-[#0D0F0A]/90 border border-[#C9A063]/30 hover:border-[#C9A063] hover:bg-[#C9A063]/10 p-3 sm:p-5 text-center flex flex-col items-center justify-center gap-1 transition-all duration-300">
-                  <span className="font-mono text-[9px] sm:text-xs text-[#C9A063] uppercase tracking-widest block font-semibold leading-snug">
-                    {language === "UA" ? "Потуж-\nність" : "Capacity"}
-                  </span>
-                  <span className="font-serif text-base sm:text-xl md:text-2xl text-[#F3EEE6] block font-light leading-none">
-                    +{capacityIncrease}/{language === "UA" ? "рік" : "yr"}
-                  </span>
-                  <span className="font-mono text-[9px] sm:text-xs text-[#DCC8AA]/75 block">
-                    {language === "UA" ? "Суконь / Рік" : "Gowns\nScaling"}
-                  </span>
-                </div>
-
-                <div className="bg-[#0D0F0A]/90 border border-[#C9A063]/30 hover:border-[#C9A063] hover:bg-[#C9A063]/10 p-3 sm:p-5 text-center flex flex-col items-center justify-center gap-1 transition-all duration-300">
-                  <span className="font-mono text-[9px] sm:text-xs text-[#C9A063] uppercase tracking-widest block font-semibold leading-snug">
-                    {language === "UA" ? "Флагмани" : "Flagships"}
-                  </span>
-                  <span className="font-serif text-sm sm:text-lg md:text-xl text-[#F3EEE6] block font-light leading-tight break-words">
-                    {language === "UA" ? "Сідней /\nДубай" : "Sydney /\nDubai"}
-                  </span>
-                  <span className="font-mono text-[9px] sm:text-xs text-[#DCC8AA]/75 block">
-                    {language === "UA" ? "Прямі Салони" : "Direct\nSalons"}
-                  </span>
-                </div>
-
-              </div>
-            </div>
-          </AnimateOnScroll>
-
-          {/* RIGHT: Why Invest — collapsible card */}
-          <AnimateOnScroll preset="slideInRight" delay={0.15} className="lg:col-span-6 flex flex-col">
-            <div className={`bg-[#060803]/85 backdrop-blur-md border border-[#C9A063]/40 p-6 sm:p-10 rounded-none shadow-2xl animated-gold-border flex flex-col transition-all duration-300 ${
-              isCardOpen ? "h-full justify-between" : "h-auto"
-            }`}>
-
-              {/* ── Collapsible header ── */}
-              <motion.button
-                onClick={() => setIsCardOpen((v) => !v)}
-                whileTap={{ scale: 0.985 }}
-                className="w-full text-left border-b border-[#C9A063]/30 pb-4 cursor-pointer group flex items-start justify-between gap-3"
+              <button
+                onClick={() => { setDeckModalOpen(true); setSubmitted(false); }}
+                className="px-6 py-3 bg-[#C9A063] hover:bg-[#DCC8AA] text-[#060803] font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all duration-300 rounded-none cursor-pointer flex-shrink-0 shadow-lg luxury-shimmer-btn"
               >
-                <div>
-                  <span className="font-mono text-xs sm:text-sm text-[#C9A063] uppercase tracking-[0.3em] block font-medium mb-1">
-                    {language === "UA" ? "ЦІННІСНА ПРОПОЗИЦІЯ" : "VALUE PROPOSITION"}
-                  </span>
-                  <h3 className="font-serif text-2xl sm:text-3xl text-[#F3EEE6] uppercase font-light group-hover:text-[#C9A063] transition-colors duration-300">
-                    {t("whyInvestTitle")}
-                  </h3>
-                </div>
-                <motion.span
-                  animate={{ rotate: isCardOpen ? 180 : 0 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className={`flex-shrink-0 mt-2 transition-colors duration-300 ${
-                    isCardOpen ? "text-[#C9A063]" : "text-[#DCC8AA]/40 group-hover:text-[#C9A063]/70"
-                  }`}
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                </motion.span>
-              </motion.button>
-
-              {/* ── Collapsible body ── */}
-              <AnimatePresence initial={false}>
-                {isCardOpen && (
-                  <motion.div
-                    key="card-body"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-                    style={{ overflow: "hidden" }}
-                  >
-                    <div className="pt-5 flex flex-col gap-0 flex-1">
-
-                      {/* Accordion items 01–04 */}
-                      <div className="divide-y divide-[#DCC8AA]/15">
-                        {WHY_INVEST_ITEMS.map((item) => {
-                          const isOpen = openItem === item.id;
-                          const title = language === "UA" ? item.titleUA : item.titleEN;
-                          const desc  = language === "UA" ? item.descUA  : item.descEN;
-                          return (
-                            <div key={item.id}>
-                              <button
-                                onClick={() => setOpenItem(isOpen ? null : item.id)}
-                                className="w-full flex items-center justify-between py-3.5 gap-4 cursor-pointer group"
-                              >
-                                <div className="flex items-center space-x-4 text-left">
-                                  <span className={`font-mono text-sm font-bold flex-shrink-0 transition-colors duration-300 ${
-                                    isOpen ? "text-[#C9A063]" : "text-[#C9A063]/60 group-hover:text-[#C9A063]"
-                                  }`}>{item.id}</span>
-                                  <h4 className={`font-serif text-sm sm:text-base uppercase font-medium transition-colors duration-300 ${
-                                    isOpen ? "text-[#C9A063]" : "text-[#F3EEE6] group-hover:text-[#C9A063]"
-                                  }`}>{title}</h4>
-                                </div>
-                                <motion.span
-                                  animate={{ rotate: isOpen ? 180 : 0 }}
-                                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                                  className={`flex-shrink-0 transition-colors duration-300 ${
-                                    isOpen ? "text-[#C9A063]" : "text-[#DCC8AA]/35 group-hover:text-[#C9A063]/70"
-                                  }`}
-                                >
-                                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="6 9 12 15 18 9" />
-                                  </svg>
-                                </motion.span>
-                              </button>
-                              <AnimatePresence initial={false}>
-                                {isOpen && (
-                                  <motion.div
-                                    key="desc"
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    exit={{ height: 0, opacity: 0 }}
-                                    transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                                    style={{ overflow: "hidden" }}
-                                  >
-                                    <p className="font-sans text-xs sm:text-sm text-[#DCC8AA]/85 font-light leading-relaxed pl-9 pb-3.5">
-                                      {desc}
-                                    </p>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* Pitch Deck Button */}
-                      <div className="pt-5 mt-auto">
-                        <button
-                          onClick={() => { setDeckModalOpen(true); setSubmitted(false); }}
-                          className="w-full py-4 bg-[#C9A063] hover:bg-[#DCC8AA] text-[#060803] font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold transition-all duration-300 rounded-none cursor-pointer t-btn-frame shadow-lg luxury-shimmer-btn group"
-                        >
-                          <span>{language === "UA" ? "ЗАПИТАТИ КОНФІДЕНЦІЙНИЙ МЕМОРАНДУМ" : "Request Confidential Pitch Deck"}</span>
-                          <span className="inline-block ml-2 group-hover:translate-x-2 transition-transform duration-300">→</span>
-                        </button>
-                      </div>
-
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
+                {language === "UA" ? "ЗАПИТАТИ ПЕК" : "Request Pitch Deck"} →
+              </button>
             </div>
-          </AnimateOnScroll>
-
-        </div>{/* end 2-col grid */}
-
-        {/* BOTTOM: 5-Year Roadmap Accordion */}
-        <AnimateOnScroll preset="fadeUp" delay={0.25} className="w-full max-w-[1600px] mx-auto">
-          <div className="bg-[#060803]/85 backdrop-blur-md border border-[#C9A063]/40 rounded-none shadow-2xl animated-gold-border overflow-hidden">
-
-            <div className="border-b border-[#C9A063]/20 px-6 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <span className="font-mono text-xs sm:text-sm text-[#C9A063] uppercase tracking-[0.35em] font-semibold">
-                {language === "UA" ? "5-РІЧНА СТРАТЕГІЧНА ДОРОЖНЯ КАРТА" : "5-YEAR STRATEGIC ROADMAP"}
-              </span>
-              <span className="font-serif text-sm sm:text-base text-[#DCC8AA]/70 uppercase font-light">
-                {language === "UA" ? "Хронологія Зростання" : "Growth Timeline & Key Milestones"}
-              </span>
-            </div>
-
-            <div className="divide-y divide-[#DCC8AA]/10">
-              {ROADMAP_ITEMS.map((year) => {
-                const isOpen = openRoadmap === year.id;
-                const label = language === "UA" ? year.labelUA : year.labelEN;
-                const title = language === "UA" ? year.titleUA : year.titleEN;
-                const desc  = language === "UA" ? year.descUA  : year.descEN;
-                return (
-                  <div key={year.id}>
-                    <button
-                      onClick={() => setOpenRoadmap(isOpen ? null : year.id)}
-                      className="w-full flex items-center justify-between px-6 sm:px-8 py-4 cursor-pointer hover:bg-[#C9A063]/4 transition-colors duration-300 group"
-                    >
-                      <div className="flex items-center gap-5 text-left">
-                        <span className="font-mono text-[10px] sm:text-xs text-[#C9A063] tracking-[0.3em] uppercase font-semibold flex-shrink-0">
-                          {label}
-                        </span>
-                        <span className={`font-serif text-sm sm:text-base uppercase font-medium transition-colors duration-300 ${
-                          isOpen ? "text-[#C9A063]" : "text-[#F3EEE6] group-hover:text-[#C9A063]"
-                        }`}>
-                          {title}
-                        </span>
-                      </div>
-                      <motion.span
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                        className={`flex-shrink-0 transition-colors duration-300 ${
-                          isOpen ? "text-[#C9A063]" : "text-[#DCC8AA]/30 group-hover:text-[#C9A063]/60"
-                        }`}
-                      >
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="6 9 12 15 18 9" />
-                        </svg>
-                      </motion.span>
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="roadmap-desc"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                          style={{ overflow: "hidden" }}
-                        >
-                          <p className="font-sans text-xs sm:text-sm text-[#DCC8AA]/80 font-light leading-relaxed px-6 sm:px-8 pb-4 pt-0.5">
-                            {desc}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
-
           </div>
         </AnimateOnScroll>
 
+        {/* ── 3. Minimalist Interactive Cards Grid (Information via Modals/Popups) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 pt-2">
+
+          {/* Card 1: Financial Calculator Modal Trigger */}
+          <AnimateOnScroll preset="fadeUp" delay={0.15}>
+            <button
+              onClick={() => setCalcModalOpen(true)}
+              className="w-full h-full text-left bg-[#0D0F0A]/90 hover:bg-[#C9A063]/10 border border-[#C9A063]/35 hover:border-[#C9A063] p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 group cursor-pointer shadow-xl"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-[#C9A063] tracking-[0.25em] uppercase font-semibold">01 · MODELING</span>
+                  <span className="font-mono text-xs text-[#C9A063] group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+                <h4 className="font-serif text-xl sm:text-2xl text-[#F3EEE6] uppercase font-light group-hover:text-[#C9A063] transition-colors">
+                  {t("calculatorTitle")}
+                </h4>
+                <p className="font-sans text-xs text-[#DCC8AA]/75 font-light leading-relaxed">
+                  {language === "UA" ? "Симулятор дохідності ROI від $50k до $1M." : "Interactive ROI ROI calculator from $50k to $1M."}
+                </p>
+              </div>
+              <div className="pt-4 border-t border-[#C9A063]/20 flex items-center justify-between font-mono text-xs text-[#C9A063]">
+                <span>{projectedRoiMultiplier}x ROI Projected</span>
+                <span className="underline uppercase tracking-wider">{language === "UA" ? "Відкрити Калькулятор" : "Open Calculator"}</span>
+              </div>
+            </button>
+          </AnimateOnScroll>
+
+          {/* Card 2: Why Invest Modal Trigger */}
+          <AnimateOnScroll preset="fadeUp" delay={0.2}>
+            <button
+              onClick={() => setPillarsModalOpen(true)}
+              className="w-full h-full text-left bg-[#0D0F0A]/90 hover:bg-[#C9A063]/10 border border-[#C9A063]/35 hover:border-[#C9A063] p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 group cursor-pointer shadow-xl"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-[#C9A063] tracking-[0.25em] uppercase font-semibold">02 · PROPOSITION</span>
+                  <span className="font-mono text-xs text-[#C9A063] group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+                <h4 className="font-serif text-xl sm:text-2xl text-[#F3EEE6] uppercase font-light group-hover:text-[#C9A063] transition-colors">
+                  {t("whyInvestTitle")}
+                </h4>
+                <p className="font-sans text-xs text-[#DCC8AA]/75 font-light leading-relaxed">
+                  {language === "UA" ? "4 ключові переваги: маржинальність 75%+, 3D-технології." : "4 core pillars: 75%+ margins, 3D fitting tech & prestige."}
+                </p>
+              </div>
+              <div className="pt-4 border-t border-[#C9A063]/20 flex items-center justify-between font-mono text-xs text-[#C9A063]">
+                <span>75%+ Gross Margin</span>
+                <span className="underline uppercase tracking-wider">{language === "UA" ? "Переглянути Огляд" : "View Pillars"}</span>
+              </div>
+            </button>
+          </AnimateOnScroll>
+
+          {/* Card 3: 5-Year Roadmap Modal Trigger */}
+          <AnimateOnScroll preset="fadeUp" delay={0.25}>
+            <button
+              onClick={() => setRoadmapModalOpen(true)}
+              className="w-full h-full text-left bg-[#0D0F0A]/90 hover:bg-[#C9A063]/10 border border-[#C9A063]/35 hover:border-[#C9A063] p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 group cursor-pointer shadow-xl"
+            >
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs text-[#C9A063] tracking-[0.25em] uppercase font-semibold">03 · STRATEGY</span>
+                  <span className="font-mono text-xs text-[#C9A063] group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+                <h4 className="font-serif text-xl sm:text-2xl text-[#F3EEE6] uppercase font-light group-hover:text-[#C9A063] transition-colors">
+                  {language === "UA" ? "Стратегічна Карта" : "Strategic Roadmap"}
+                </h4>
+                <p className="font-sans text-xs text-[#DCC8AA]/75 font-light leading-relaxed">
+                  {language === "UA" ? "План розвитку: Сідней, Дубай, Київ та оптові мережі." : "5-year growth timeline across Sydney, Gulf & Paris."}
+                </p>
+              </div>
+              <div className="pt-4 border-t border-[#C9A063]/20 flex items-center justify-between font-mono text-xs text-[#C9A063]">
+                <span>Years 1–5 Roadmap</span>
+                <span className="underline uppercase tracking-wider">{language === "UA" ? "Читати Хронологію" : "View Roadmap"}</span>
+              </div>
+            </button>
+          </AnimateOnScroll>
+
+        </div>
+
       </div>
 
-      {/* ── Pitch Deck Modal ─────────────────────────────────── */}
-      <AnimatePresence>
-        {deckModalOpen && (
-          <motion.div
-            key="modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-[#060803]/90 backdrop-blur-md"
-            onClick={(e) => { if (e.target === e.currentTarget) setDeckModalOpen(false); }}
+      {/* ── MODAL 1: Financial Calculator Popup ───────────────────────────────── */}
+      {calcModalOpen && mounted && createPortalDom(
+        <div
+          onClick={() => setCalcModalOpen(false)}
+          className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#0D0F0A] border border-[#C9A063]/40 w-[calc(100%-2rem)] max-w-xl p-6 sm:p-8 space-y-6 text-[#F3EEE6] shadow-2xl relative m-auto"
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 30 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 30 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-[#0D0F0A] border border-[#C9A063]/50 p-8 sm:p-12 max-w-lg w-full shadow-2xl relative"
+            <button
+              onClick={() => setCalcModalOpen(false)}
+              className="absolute top-4 right-4 text-[#C9A063] hover:text-[#F3EEE6] text-xl font-mono cursor-pointer"
             >
-              <button
-                onClick={() => setDeckModalOpen(false)}
-                className="absolute top-4 right-4 text-[#DCC8AA]/60 hover:text-[#C9A063] transition-colors duration-200 cursor-pointer font-mono text-lg"
-              >
-                ✕
-              </button>
+              ✕
+            </button>
 
-              {!submitted ? (
-                <div className="space-y-6">
-                  <div className="space-y-2 border-b border-[#C9A063]/20 pb-5">
-                    <span className="font-mono text-xs text-[#C9A063] uppercase tracking-[0.3em] block">
-                      {language === "UA" ? "КОНФІДЕНЦІЙНИЙ ДОСТУП" : "Confidential Access"}
-                    </span>
-                    <h3 className="font-serif text-2xl sm:text-3xl text-[#F3EEE6] uppercase font-light">
-                      {language === "UA" ? "Запитати Меморандум" : "Request Pitch Deck"}
-                    </h3>
+            <div className="border-b border-[#C9A063]/30 pb-3">
+              <span className="font-mono text-xs text-[#C9A063] uppercase tracking-[0.3em] block font-semibold">
+                {language === "UA" ? "ФІНАНСОВЕ МОДЕЛЮВАННЯ" : "FINANCIAL MODELING"}
+              </span>
+              <h3 className="font-serif text-2xl sm:text-3xl text-[#F3EEE6] uppercase font-light mt-1">
+                {t("calculatorTitle")}
+              </h3>
+            </div>
+
+            {/* Slider */}
+            <div className="space-y-4">
+              <div className="space-y-1">
+                <span className="font-mono text-xs text-[#DCC8AA]/80 uppercase tracking-wider block font-medium">
+                  {t("targetCapital")}
+                </span>
+                <span className="font-serif text-3xl sm:text-4xl text-[#C9A063] font-light block">
+                  ${investmentAmount.toLocaleString()} USD
+                </span>
+              </div>
+
+              <input
+                type="range" min="50000" max="1000000" step="500"
+                value={investmentAmount}
+                onChange={(e) => setInvestmentAmount(Number(e.target.value))}
+                className="w-full h-2.5 bg-[#060803] border border-[#C9A063]/50 appearance-none cursor-pointer accent-[#C9A063]"
+              />
+
+              <div className="flex justify-between font-mono text-xs text-[#DCC8AA]/80 uppercase tracking-widest">
+                <span>$50k Min</span>
+                <span>$500k Growth</span>
+                <span>$1M Lead</span>
+              </div>
+            </div>
+
+            {/* 3 Metrics */}
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[#C9A063]/30">
+              <div className="bg-[#060803] border border-[#C9A063]/30 p-3 text-center">
+                <span className="font-mono text-[10px] text-[#C9A063] uppercase tracking-wider block">3-Yr Return</span>
+                <span className="font-serif text-lg text-[#F3EEE6] font-light block">${projectedReturn.toLocaleString()}</span>
+                <span className="font-mono text-[9px] text-[#DCC8AA]/70 block">{projectedRoiMultiplier}x ROI</span>
+              </div>
+              <div className="bg-[#060803] border border-[#C9A063]/30 p-3 text-center">
+                <span className="font-mono text-[10px] text-[#C9A063] uppercase tracking-wider block">Capacity</span>
+                <span className="font-serif text-lg text-[#F3EEE6] font-light block">+{capacityIncrease}/yr</span>
+                <span className="font-mono text-[9px] text-[#DCC8AA]/70 block">Gowns</span>
+              </div>
+              <div className="bg-[#060803] border border-[#C9A063]/30 p-3 text-center">
+                <span className="font-mono text-[10px] text-[#C9A063] uppercase tracking-wider block">Salons</span>
+                <span className="font-serif text-sm text-[#F3EEE6] font-light block">Sydney / Gulf</span>
+                <span className="font-mono text-[9px] text-[#DCC8AA]/70 block">Direct</span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => { setCalcModalOpen(false); setDeckModalOpen(true); setSubmitted(false); }}
+              className="w-full py-3 bg-[#C9A063] hover:bg-[#DCC8AA] text-[#060803] font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all rounded-none cursor-pointer"
+            >
+              {language === "UA" ? "ОТРИМАТИ ПОВНИЙ ФІНАНСОВИЙ ПЛАН" : "Get Complete Investment Plan"} →
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* ── MODAL 2: Strategic Pillars Popup ──────────────────────────────────── */}
+      {pillarsModalOpen && mounted && createPortalDom(
+        <div
+          onClick={() => setPillarsModalOpen(false)}
+          className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#0D0F0A] border border-[#C9A063]/40 w-[calc(100%-2rem)] max-w-xl p-6 sm:p-8 space-y-5 text-[#F3EEE6] shadow-2xl relative m-auto"
+          >
+            <button
+              onClick={() => setPillarsModalOpen(false)}
+              className="absolute top-4 right-4 text-[#C9A063] hover:text-[#F3EEE6] text-xl font-mono cursor-pointer"
+            >
+              ✕
+            </button>
+
+            <div className="border-b border-[#C9A063]/30 pb-3">
+              <span className="font-mono text-xs text-[#C9A063] uppercase tracking-[0.3em] block font-semibold">
+                {language === "UA" ? "ЦІННІСНА ПРОПОЗИЦІЯ" : "VALUE PROPOSITION"}
+              </span>
+              <h3 className="font-serif text-2xl text-[#F3EEE6] uppercase font-light mt-1">
+                {t("whyInvestTitle")}
+              </h3>
+            </div>
+
+            <div className="space-y-4 divide-y divide-[#DCC8AA]/15">
+              {WHY_INVEST_ITEMS.map((item) => (
+                <div key={item.id} className="pt-3 space-y-1">
+                  <div className="flex items-center space-x-3">
+                    <span className="font-mono text-xs text-[#C9A063] font-bold">{item.id}</span>
+                    <h4 className="font-serif text-base text-[#F3EEE6] uppercase font-medium">{language === "UA" ? item.titleUA : item.titleEN}</h4>
                   </div>
-
-                  <form onSubmit={handleFormSubmit} className="space-y-4">
-                    {[
-                      { key: "name",  labelEN: "Full Name",    labelUA: "Повне Ім'я",   type: "text" },
-                      { key: "fund",  labelEN: "Fund / Company", labelUA: "Фонд / Компанія", type: "text" },
-                      { key: "email", labelEN: "Email",         labelUA: "Email",         type: "email" },
-                      { key: "phone", labelEN: "Phone",         labelUA: "Телефон",       type: "tel" },
-                    ].map((field) => (
-                      <div key={field.key} className="space-y-1">
-                        <label className="font-mono text-xs text-[#DCC8AA]/80 uppercase tracking-wider">
-                          {language === "UA" ? field.labelUA : field.labelEN}
-                        </label>
-                        <input
-                          type={field.type}
-                          value={formData[field.key as keyof typeof formData]}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, [field.key]: e.target.value }))}
-                          required
-                          className="w-full bg-[#060803] border border-[#C9A063]/30 focus:border-[#C9A063] outline-none px-4 py-3 font-sans text-sm text-[#F3EEE6] placeholder-[#DCC8AA]/30 transition-colors duration-200"
-                        />
-                      </div>
-                    ))}
-                    <button
-                      type="submit"
-                      className="w-full py-4 bg-[#C9A063] hover:bg-[#DCC8AA] text-[#060803] font-mono text-xs uppercase tracking-[0.25em] font-semibold transition-all duration-300 cursor-pointer mt-2"
-                    >
-                      {language === "UA" ? "НАДІСЛАТИ ЗАПИТ" : "Submit Request"} →
-                    </button>
-                  </form>
+                  <p className="font-sans text-xs text-[#DCC8AA]/80 font-light pl-7">{language === "UA" ? item.descUA : item.descEN}</p>
                 </div>
-              ) : (
-                <div className="text-center space-y-5 py-6">
-                  <div className="text-4xl">✦</div>
-                  <div className="space-y-2">
-                    <h3 className="font-serif text-2xl text-[#C9A063] uppercase font-light">
-                      {language === "UA" ? "Запит Отримано" : "Request Received"}
-                    </h3>
-                    <p className="font-sans text-sm text-[#DCC8AA]/80 font-light">
-                      {language === "UA"
-                        ? "Наша команда зв'яжеться з вами протягом 24 годин."
-                        : "Our team will contact you within 24 hours."}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setDeckModalOpen(false)}
-                    className="font-mono text-xs text-[#C9A063] uppercase tracking-wider hover:text-[#DCC8AA] transition-colors cursor-pointer"
-                  >
-                    {language === "UA" ? "ЗАКРИТИ" : "CLOSE"} ✕
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              ))}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
 
+      {/* ── MODAL 3: 5-Year Roadmap Popup ──────────────────────────────────────── */}
+      {roadmapModalOpen && mounted && createPortalDom(
+        <div
+          onClick={() => setRoadmapModalOpen(false)}
+          className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#0D0F0A] border border-[#C9A063]/40 w-[calc(100%-2rem)] max-w-xl p-6 sm:p-8 space-y-5 text-[#F3EEE6] shadow-2xl relative m-auto"
+          >
+            <button
+              onClick={() => setRoadmapModalOpen(false)}
+              className="absolute top-4 right-4 text-[#C9A063] hover:text-[#F3EEE6] text-xl font-mono cursor-pointer"
+            >
+              ✕
+            </button>
+
+            <div className="border-b border-[#C9A063]/30 pb-3">
+              <span className="font-mono text-xs text-[#C9A063] uppercase tracking-[0.3em] block font-semibold">
+                {language === "UA" ? "5-РІЧНА СТРАТЕГІЧНА ДОРОЖНЯ КАРТА" : "5-YEAR STRATEGIC ROADMAP"}
+              </span>
+              <h3 className="font-serif text-2xl text-[#F3EEE6] uppercase font-light mt-1">
+                {language === "UA" ? "Хронологія Зростання" : "Growth Timeline & Key Milestones"}
+              </h3>
+            </div>
+
+            <div className="space-y-4 divide-y divide-[#DCC8AA]/15">
+              {ROADMAP_ITEMS.map((item) => (
+                <div key={item.id} className="pt-3 space-y-1">
+                  <span className="font-mono text-[10px] text-[#C9A063] tracking-[0.25em] uppercase font-semibold block">
+                    {language === "UA" ? item.labelUA : item.labelEN}
+                  </span>
+                  <h4 className="font-serif text-base text-[#F3EEE6] uppercase font-medium">{language === "UA" ? item.titleUA : item.titleEN}</h4>
+                  <p className="font-sans text-xs text-[#DCC8AA]/80 font-light">{language === "UA" ? item.descUA : item.descEN}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* ── MODAL 4: Confidential Pitch Deck Form ──────────────────────────────── */}
+      {deckModalOpen && mounted && createPortalDom(
+        <div
+          onClick={() => setDeckModalOpen(false)}
+          className="fixed inset-0 z-[9999] bg-[#060803]/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#0D0F0A] border border-[#C9A063]/40 w-[calc(100%-2rem)] max-w-md p-6 sm:p-8 space-y-5 text-[#F3EEE6] shadow-2xl relative m-auto"
+          >
+            <button
+              onClick={() => setDeckModalOpen(false)}
+              className="absolute top-4 right-4 text-[#C9A063] hover:text-[#F3EEE6] text-xl font-mono cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {submitted ? (
+              <div className="py-8 text-center space-y-3">
+                <span className="text-3xl">✨</span>
+                <h4 className="font-serif text-2xl text-[#C9A063]">
+                  {language === "UA" ? "Запит Успішно Зареєстровано" : "Memorandum Request Registered"}
+                </h4>
+                <p className="text-xs sm:text-sm text-[#F3EEE6]/90 font-sans">
+                  {language === "UA"
+                    ? `Дякуємо, ${formData.name}. Пакет інвестора буде надіслано на ${formData.email} протягом 12 годин.`
+                    : `Thank you, ${formData.name}. The confidential investment memo will be delivered to ${formData.email} within 12 hours.`}
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div className="border-b border-[#C9A063]/30 pb-3">
+                  <span className="font-mono text-xs text-[#C9A063] uppercase tracking-[0.3em] block font-semibold">
+                    {language === "UA" ? "ПРИВАТНИЙ ДОСТУП" : "CONFIDENTIAL ACCESS"}
+                  </span>
+                  <h3 className="font-serif text-xl sm:text-2xl text-[#F3EEE6] uppercase font-light mt-1">
+                    {language === "UA" ? "Запит Інвестиційного Пакету" : "Request Pitch Deck & Memos"}
+                  </h3>
+                </div>
+
+                <div className="space-y-3 font-sans text-xs">
+                  <input
+                    type="text" required placeholder={language === "UA" ? "Ваше Повне Ім'я" : "Full Name"}
+                    value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full p-3 bg-[#060803] border border-[#C9A063]/40 text-[#F3EEE6] outline-none focus:border-[#C9A063]"
+                  />
+                  <input
+                    type="text" placeholder={language === "UA" ? "Фонд / Офіс (Необов'язково)" : "Fund / Family Office (Optional)"}
+                    value={formData.fund} onChange={(e) => setFormData({ ...formData, fund: e.target.value })}
+                    className="w-full p-3 bg-[#060803] border border-[#C9A063]/40 text-[#F3EEE6] outline-none focus:border-[#C9A063]"
+                  />
+                  <input
+                    type="email" required placeholder="Email"
+                    value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full p-3 bg-[#060803] border border-[#C9A063]/40 text-[#F3EEE6] outline-none focus:border-[#C9A063]"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-[#C9A063] hover:bg-[#DCC8AA] text-[#060803] font-mono text-xs uppercase tracking-[0.2em] font-semibold transition-all rounded-none cursor-pointer"
+                >
+                  {language === "UA" ? "НАДІСЛАТИ ЗАПИТ" : "Submit Request"} →
+                </button>
+              </form>
+            )}
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }

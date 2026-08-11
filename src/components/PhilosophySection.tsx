@@ -67,11 +67,11 @@ export function PhilosophySection() {
             </div>
           </AnimateOnScroll>
 
-          {/* RIGHT: Brand Philosophy & 5 Pillars */}
-          <AnimateOnScroll preset="slideInRight" delay={0.15} className="lg:col-span-7 space-y-4 sm:space-y-5">
+          {/* RIGHT: Brand Philosophy & 5 Pillars (Staggered sequential reveals) */}
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
 
-            {/* Header Section */}
-            <div className="space-y-2 sm:space-y-3">
+            {/* Header Section — Block 1 */}
+            <AnimateOnScroll preset="fadeUp" delay={0.1} className="space-y-2 sm:space-y-3">
               <div className="flex items-center space-x-3">
                 <span className="h-[1px] w-8 sm:w-10 bg-[#A87B3F]/60" />
                 <span className="font-mono text-[11px] sm:text-xs text-[#A87B3F] tracking-[0.3em] uppercase font-semibold">
@@ -86,10 +86,10 @@ export function PhilosophySection() {
               <p className="font-serif italic text-xs sm:text-base md:text-lg text-[#8C622D] font-light leading-relaxed">
                 {t("philosophyQuote")}
               </p>
-            </div>
+            </AnimateOnScroll>
 
-            {/* 5 Pillars — Compact 2-Column Grid even on Mobile */}
-            <div className="space-y-2 sm:space-y-3 pt-2.5 border-t border-[#A87B3F]/20">
+            {/* 5 Pillars — Block 2 (Staggered reveal) */}
+            <AnimateOnScroll preset="fadeUp" delay={0.25} className="space-y-2 sm:space-y-3 pt-2.5 border-t border-[#A87B3F]/20">
               <span className="font-mono text-[11px] sm:text-xs text-[#A87B3F] uppercase tracking-[0.25em] font-semibold block mb-1.5">
                 {t("womanCanBe")}
               </span>
@@ -135,10 +135,10 @@ export function PhilosophySection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </AnimateOnScroll>
 
-            {/* Manifesto & Quote Banner */}
-            <div className="space-y-3 pt-2.5 border-t border-[#A87B3F]/20">
+            {/* Manifesto & Quote Banner — Block 3 (Staggered reveal) */}
+            <AnimateOnScroll preset="fadeUp" delay={0.4} className="space-y-3 pt-2.5 border-t border-[#A87B3F]/20">
               <p className="font-sans text-xs sm:text-sm text-[#4D453D] leading-relaxed">
                 <strong className="text-[#1C1A17] font-semibold">VÉLORA</strong>{" "}
                 {language === "UA" 
@@ -156,9 +156,9 @@ export function PhilosophySection() {
                   — {language === "UA" ? "МАНІФЕСТ АТЕЛЬЄ VÉLORA" : "VÉLORA ATELIER MANIFESTO"}
                 </span>
               </div>
-            </div>
+            </AnimateOnScroll>
 
-          </AnimateOnScroll>
+          </div>
         </div>
       </div>
     </section>
