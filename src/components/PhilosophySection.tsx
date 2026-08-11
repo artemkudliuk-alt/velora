@@ -67,34 +67,42 @@ export function PhilosophySection() {
             </div>
           </AnimateOnScroll>
 
-          {/* RIGHT: Brand Philosophy & 5 Pillars (Staggered sequential reveals) */}
+          {/* RIGHT: Brand Philosophy & 5 Pillars (Line-by-line waterfall reveal) */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-5">
 
-            {/* Header Section — Block 1 */}
-            <AnimateOnScroll preset="fadeUp" delay={0.1} className="space-y-2 sm:space-y-3">
-              <div className="flex items-center space-x-3">
-                <span className="h-[1px] w-8 sm:w-10 bg-[#A87B3F]/60" />
-                <span className="font-mono text-[11px] sm:text-xs text-[#A87B3F] tracking-[0.3em] uppercase font-semibold">
-                  {t("philosophyEyebrow")}
-                </span>
-              </div>
+            {/* Line 1: Eyebrow */}
+            <AnimateOnScroll preset="fadeUp" delay={0.05} className="flex items-center space-x-3">
+              <span className="h-[1px] w-8 sm:w-10 bg-[#A87B3F]/60" />
+              <span className="font-mono text-[11px] sm:text-xs text-[#A87B3F] tracking-[0.3em] uppercase font-semibold">
+                {t("philosophyEyebrow")}
+              </span>
+            </AnimateOnScroll>
 
+            {/* Line 2: Main Title */}
+            <AnimateOnScroll preset="fadeUp" delay={0.15}>
               <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1C1A17] tracking-[0.05em] uppercase leading-[1.15]">
                 {t("philosophyTitle")}
               </h2>
+            </AnimateOnScroll>
 
+            {/* Line 3: Italic Quote */}
+            <AnimateOnScroll preset="fadeUp" delay={0.25}>
               <p className="font-serif italic text-xs sm:text-base md:text-lg text-[#8C622D] font-light leading-relaxed">
                 {t("philosophyQuote")}
               </p>
             </AnimateOnScroll>
 
-            {/* 5 Pillars — Block 2 (Staggered reveal) */}
-            <AnimateOnScroll preset="fadeUp" delay={0.25} className="space-y-2 sm:space-y-3 pt-2.5 border-t border-[#A87B3F]/20">
-              <span className="font-mono text-[11px] sm:text-xs text-[#A87B3F] uppercase tracking-[0.25em] font-semibold block mb-1.5">
+            {/* Line 4: 5 Pillars Category Label */}
+            <AnimateOnScroll preset="fadeUp" delay={0.3} className="pt-2.5 border-t border-[#A87B3F]/20">
+              <span className="font-mono text-[11px] sm:text-xs text-[#A87B3F] uppercase tracking-[0.25em] font-semibold block">
                 {t("womanCanBe")}
               </span>
+            </AnimateOnScroll>
 
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            {/* Line 5: 5 Pillars Grid (Each item reveals line-by-line) */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
+
+              <AnimateOnScroll preset="fadeUp" delay={0.35}>
                 <div className="flex items-start space-x-2 sm:space-x-3 p-2.5 sm:p-3 bg-[#EFE8DC]/95 backdrop-blur-xs border border-[#A87B3F]/20 hover:border-[#A87B3F]/70 transition-all duration-200">
                   <span className="text-[#A87B3F] text-[10px] sm:text-xs mt-0.5 flex-shrink-0">✦</span>
                   <div className="min-w-0">
@@ -102,7 +110,9 @@ export function PhilosophySection() {
                     <p className="font-sans text-[11px] sm:text-xs text-[#6B6156] leading-snug font-light">{t("elegantDesc")}</p>
                   </div>
                 </div>
+              </AnimateOnScroll>
 
+              <AnimateOnScroll preset="fadeUp" delay={0.4}>
                 <div className="flex items-start space-x-2 sm:space-x-3 p-2.5 sm:p-3 bg-[#EFE8DC]/95 backdrop-blur-xs border border-[#A87B3F]/20 hover:border-[#A87B3F]/70 transition-all duration-200">
                   <span className="text-[#A87B3F] text-[10px] sm:text-xs mt-0.5 flex-shrink-0">✦</span>
                   <div className="min-w-0">
@@ -110,7 +120,9 @@ export function PhilosophySection() {
                     <p className="font-sans text-[11px] sm:text-xs text-[#6B6156] leading-snug font-light">{t("feminineDesc")}</p>
                   </div>
                 </div>
+              </AnimateOnScroll>
 
+              <AnimateOnScroll preset="fadeUp" delay={0.45}>
                 <div className="flex items-start space-x-2 sm:space-x-3 p-2.5 sm:p-3 bg-[#EFE8DC]/95 backdrop-blur-xs border border-[#A87B3F]/20 hover:border-[#A87B3F]/70 transition-all duration-200">
                   <span className="text-[#A87B3F] text-[10px] sm:text-xs mt-0.5 flex-shrink-0">✦</span>
                   <div className="min-w-0">
@@ -118,7 +130,9 @@ export function PhilosophySection() {
                     <p className="font-sans text-[11px] sm:text-xs text-[#6B6156] leading-snug font-light">{t("confidentDesc")}</p>
                   </div>
                 </div>
+              </AnimateOnScroll>
 
+              <AnimateOnScroll preset="fadeUp" delay={0.5}>
                 <div className="flex items-start space-x-2 sm:space-x-3 p-2.5 sm:p-3 bg-[#EFE8DC]/95 backdrop-blur-xs border border-[#A87B3F]/20 hover:border-[#A87B3F]/70 transition-all duration-200">
                   <span className="text-[#A87B3F] text-[10px] sm:text-xs mt-0.5 flex-shrink-0">✦</span>
                   <div className="min-w-0">
@@ -126,26 +140,32 @@ export function PhilosophySection() {
                     <p className="font-sans text-[11px] sm:text-xs text-[#6B6156] leading-snug font-light">{t("seductiveDesc")}</p>
                   </div>
                 </div>
+              </AnimateOnScroll>
 
-                <div className="col-span-2 flex items-start space-x-2 sm:space-x-3 p-2.5 sm:p-3 bg-[#EFE8DC]/95 backdrop-blur-xs border border-[#A87B3F]/20 hover:border-[#A87B3F]/70 transition-all duration-200">
+              <AnimateOnScroll preset="fadeUp" delay={0.55} className="col-span-2">
+                <div className="flex items-start space-x-2 sm:space-x-3 p-2.5 sm:p-3 bg-[#EFE8DC]/95 backdrop-blur-xs border border-[#A87B3F]/20 hover:border-[#A87B3F]/70 transition-all duration-200">
                   <span className="text-[#A87B3F] text-[10px] sm:text-xs mt-0.5 flex-shrink-0">✦</span>
                   <div className="min-w-0">
                     <h4 className="font-serif text-xs sm:text-sm text-[#1C1A17] uppercase tracking-wider font-semibold">{t("powerful")}</h4>
                     <p className="font-sans text-[11px] sm:text-xs text-[#6B6156] leading-snug font-light">{pText(language, t("powerfulDesc"))}</p>
                   </div>
                 </div>
-              </div>
-            </AnimateOnScroll>
+              </AnimateOnScroll>
 
-            {/* Manifesto & Quote Banner — Block 3 (Staggered reveal) */}
-            <AnimateOnScroll preset="fadeUp" delay={0.4} className="space-y-3 pt-2.5 border-t border-[#A87B3F]/20">
+            </div>
+
+            {/* Line 6: Paragraph */}
+            <AnimateOnScroll preset="fadeUp" delay={0.6} className="pt-2.5 border-t border-[#A87B3F]/20">
               <p className="font-sans text-xs sm:text-sm text-[#4D453D] leading-relaxed">
                 <strong className="text-[#1C1A17] font-semibold">VÉLORA</strong>{" "}
                 {language === "UA" 
                   ? "створює моду для жінок, які не бояться бути помітними та незабутніми."
                   : "creates fashion for women who are not afraid to be seen and remembered."}
               </p>
+            </AnimateOnScroll>
 
+            {/* Line 7: Manifesto Banner */}
+            <AnimateOnScroll preset="fadeUp" delay={0.65}>
               <div className="p-3 sm:p-4 bg-[#1C1A17] text-[#F3EEE6] border border-[#C9A063]/40 shadow-lg">
                 <p className="font-serif italic text-xs sm:text-sm md:text-base text-[#C9A063] font-light">
                   {language === "UA" 
