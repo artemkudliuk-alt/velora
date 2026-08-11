@@ -339,7 +339,7 @@ export function FullSizeScrollerStepper() {
 
         </div>
 
-        {/* TEXT 1: AURA NOCTURNE — raised higher on mobile */}
+        {/* TEXT 1: AURA NOCTURNE — Desktop RIGHT aligned */}
         <motion.div
           style={{
             opacity: text1Opacity,
@@ -350,12 +350,12 @@ export function FullSizeScrollerStepper() {
           }}
           className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[54%] lg:w-[52%] xl:w-[50%] z-20
             flex items-end md:items-center
-            justify-start
+            justify-start md:justify-end
             px-5 pr-6 pb-28 sm:pb-32 md:pb-0
-            md:pl-12 lg:pl-14 md:pr-10"
+            md:pl-10 md:pr-16 lg:pr-24"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8">
-            <div className="flex items-center space-x-3 opacity-90">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:text-right -translate-y-4 md:-translate-y-8 flex flex-col md:items-end">
+            <div className="flex items-center space-x-3 opacity-90 justify-start md:justify-end">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[0].categoryUA : DRESSES[0].categoryEN}
               </span>
@@ -370,11 +370,11 @@ export function FullSizeScrollerStepper() {
               </p>
             </div>
 
-            <div className="space-y-2 border-l border-[#C9A063]/40 pl-3 md:pl-5 py-1">
+            <div className="space-y-2 border-l md:border-l-0 md:border-r border-[#C9A063]/40 pl-3 md:pl-0 md:pr-5 py-1">
               <p className="font-sans text-[11px] md:text-sm text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
                 {language === "UA" ? DRESSES[0].descriptionUA : DRESSES[0].descriptionEN}
               </p>
-              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4">
+              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4 justify-start md:justify-end">
                 <span className="font-mono text-[10px] md:text-xs text-[#C9A063] tracking-widest uppercase">
                   ◆ {language === "UA" ? DRESSES[0].fabricUA : DRESSES[0].fabricEN}
                 </span>
@@ -384,7 +384,7 @@ export function FullSizeScrollerStepper() {
               </div>
             </div>
 
-            <div className="pt-1 flex items-center space-x-6">
+            <div className="pt-1 flex items-center space-x-6 justify-start md:justify-end">
               <button
                 onClick={() => handleOpenModal(DRESSES[0], "order")}
                 className="group relative inline-flex items-center space-x-2 text-[11px] md:text-sm uppercase tracking-[0.22em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
@@ -405,7 +405,7 @@ export function FullSizeScrollerStepper() {
           </div>
         </motion.div>
 
-        {/* TEXT 2: SOLARIS ECLIPSE — raised higher on mobile */}
+        {/* TEXT 2: SOLARIS ECLIPSE — Desktop LEFT aligned */}
         <motion.div
           style={{
             opacity: text2Opacity,
@@ -418,10 +418,10 @@ export function FullSizeScrollerStepper() {
             flex items-end md:items-center
             justify-start
             px-5 pr-6 pb-28 sm:pb-32 md:pb-0
-            md:pr-12 lg:pr-14 md:pl-10"
+            md:pl-16 lg:pl-24 md:pr-10"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8">
-            <div className="flex items-center space-x-3 opacity-90">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8 flex flex-col items-start">
+            <div className="flex items-center space-x-3 opacity-90 justify-start">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[1].categoryUA : DRESSES[1].categoryEN}
               </span>
@@ -440,7 +440,7 @@ export function FullSizeScrollerStepper() {
               <p className="font-sans text-[11px] md:text-sm text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
                 {language === "UA" ? DRESSES[1].descriptionUA : DRESSES[1].descriptionEN}
               </p>
-              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4">
+              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4 justify-start">
                 <span className="font-mono text-[10px] md:text-xs text-[#C9A063] tracking-widest uppercase">
                   ◆ {language === "UA" ? DRESSES[1].fabricUA : DRESSES[1].fabricEN}
                 </span>
@@ -450,7 +450,7 @@ export function FullSizeScrollerStepper() {
               </div>
             </div>
 
-            <div className="pt-1 flex items-center space-x-6">
+            <div className="pt-1 flex items-center space-x-6 justify-start">
               <button
                 onClick={() => handleOpenModal(DRESSES[1], "order")}
                 className="group relative inline-flex items-center space-x-2 text-[11px] md:text-sm uppercase tracking-[0.22em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
@@ -471,7 +471,7 @@ export function FullSizeScrollerStepper() {
           </div>
         </motion.div>
 
-        {/* TEXT 3: TERRA CONTEMPORANEA — raised higher on mobile */}
+        {/* TEXT 3: TERRA CONTEMPORANEA — Desktop RIGHT aligned */}
         <motion.div
           style={{
             opacity: text3Opacity,
@@ -482,12 +482,12 @@ export function FullSizeScrollerStepper() {
           }}
           className="absolute inset-0 md:inset-y-0 md:right-0 w-full md:w-[56%] lg:w-[54%] xl:w-[52%] z-20
             flex items-end md:items-center
-            justify-start
+            justify-start md:justify-end
             px-5 pr-6 pb-28 sm:pb-32 md:pb-0
-            md:pl-12 lg:pl-14 md:pr-16 lg:pr-24"
+            md:pl-10 md:pr-16 lg:pr-24"
         >
-          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left -translate-y-4 md:-translate-y-8">
-            <div className="flex items-center space-x-3 opacity-90">
+          <div className="w-full max-w-sm md:max-w-lg lg:max-w-xl space-y-3 md:space-y-5 text-left md:text-right -translate-y-4 md:-translate-y-8 flex flex-col md:items-end">
+            <div className="flex items-center space-x-3 opacity-90 justify-start md:justify-end">
               <span className="font-mono text-[10px] md:text-[13px] text-[#C9A063] tracking-[0.32em] uppercase">
                 {language === "UA" ? DRESSES[2].categoryUA : DRESSES[2].categoryEN}
               </span>
@@ -502,11 +502,11 @@ export function FullSizeScrollerStepper() {
               </p>
             </div>
 
-            <div className="space-y-2 border-l border-[#C9A063]/40 pl-3 md:pl-5 py-1">
+            <div className="space-y-2 border-l md:border-l-0 md:border-r border-[#C9A063]/40 pl-3 md:pl-0 md:pr-5 py-1">
               <p className="font-sans text-[11px] md:text-sm text-[#F3EEE6]/85 font-light leading-relaxed tracking-wide">
                 {language === "UA" ? DRESSES[2].descriptionUA : DRESSES[2].descriptionEN}
               </p>
-              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4">
+              <div className="flex flex-col gap-y-1 md:flex-row md:flex-wrap md:gap-x-4 justify-start md:justify-end">
                 <span className="font-mono text-[10px] md:text-xs text-[#C9A063] tracking-widest uppercase">
                   ◆ {language === "UA" ? DRESSES[2].fabricUA : DRESSES[2].fabricEN}
                 </span>
@@ -516,7 +516,7 @@ export function FullSizeScrollerStepper() {
               </div>
             </div>
 
-            <div className="pt-1 flex items-center space-x-6">
+            <div className="pt-1 flex items-center space-x-6 justify-start md:justify-end">
               <button
                 onClick={() => handleOpenModal(DRESSES[2], "order")}
                 className="group relative inline-flex items-center space-x-2 text-[11px] md:text-sm uppercase tracking-[0.22em] text-[#F3EEE6] hover:text-[#C9A063] transition-colors cursor-pointer py-1"
