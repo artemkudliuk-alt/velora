@@ -124,7 +124,7 @@ export function ContactSection() {
                   <span className="font-sans text-xs text-[#C9A063] uppercase tracking-wider block font-semibold">
                     {language === "UA" ? "Приватний Запис" : "Private Appointments"}
                   </span>
-                  <a href="tel:+380777704178" className="font-sans text-sm text-[#F3EEE6] hover:text-[#C9A063] transition-colors block font-medium">+380 7777 04178</a>
+                  <a href="tel:+380777704177" className="font-sans text-sm text-[#F3EEE6] hover:text-[#C9A063] transition-colors block font-medium">+380 7777 04177</a>
                   <a href="tel:+61415779783" className="font-sans text-sm text-[#F3EEE6] hover:text-[#C9A063] transition-colors block font-medium">+61415 779 783</a>
                 </div>
               </div>

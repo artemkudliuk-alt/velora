@@ -184,7 +184,7 @@ export function RootLayoutHeader() {
             <div className="text-left sm:text-right font-sans text-xs sm:text-sm text-[#DCC8AA]/90 leading-relaxed space-y-1">
               <div className="font-mono uppercase tracking-[0.25em] text-xs text-[#C9A063] font-semibold">{t("conciergeContact")}</div>
               <div className="space-y-0.5 font-sans">
-                <a href="tel:+380777704178" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+380 7777 04178</a>
+                <a href="tel:+380777704177" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+380 7777 04177</a>
                 <a href="tel:+61415779783" className="font-semibold text-[#F3EEE6] hover:text-[#C9A063] transition-colors block">+61415 779 783</a>
               </div>
               <a href="mailto:concierge@velora-couture.com" className="hover:text-[#C9A063] transition-colors font-medium text-[#DCC8AA] block pt-0.5">

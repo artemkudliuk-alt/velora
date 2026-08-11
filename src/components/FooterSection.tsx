@@ -125,7 +125,7 @@ export function FooterSection() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 w-full max-w-4xl font-sans text-xs sm:text-sm text-[#DCC8AA]/90">
           <div className="text-center sm:text-left space-y-1">
             <span className="text-[#C9A063] uppercase tracking-wider block font-semibold text-xs">{t("directLine")}</span>
-            <a href="tel:+380777704178" className="text-[#F3EEE6] hover:text-[#C9A063] transition-colors font-medium text-sm sm:text-base block">+380 7777 04178</a>
+            <a href="tel:+380777704177" className="text-[#F3EEE6] hover:text-[#C9A063] transition-colors font-medium text-sm sm:text-base block">+380 7777 04177</a>
             <a href="tel:+61415779783" className="text-[#F3EEE6] hover:text-[#C9A063] transition-colors font-medium text-sm sm:text-base block">+61415 779 783</a>
           </div>
 
