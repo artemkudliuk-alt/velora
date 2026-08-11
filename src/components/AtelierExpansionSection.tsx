@@ -53,7 +53,7 @@ function Chevron({ open }: { open: boolean }) {
 }
 
 export function AtelierExpansionSection() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   // All groups closed by default
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -68,26 +68,25 @@ export function AtelierExpansionSection() {
   };
 
   return (
-    <section className="relative z-30 w-full pt-16 sm:pt-24 pb-24 sm:pb-32 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#060803] text-[#F3EEE6]">
-      <div className="max-w-[860px] mx-auto space-y-12">
+    <section className="relative z-30 w-full pt-4 sm:pt-8 pb-16 sm:pb-24 px-4 sm:px-8 md:px-12 lg:px-16 bg-[#060803] text-[#F3EEE6]">
+      <div className="max-w-[860px] mx-auto space-y-6">
 
-        {/* ── Centered Header ─────────────────────────────────────────── */}
-        <ParallaxReveal yOffset={24} duration={0.85}>
-          <div className="text-center space-y-5 pb-10">
-            <div className="flex items-center justify-center space-x-3">
-              <span className="h-[1px] w-10 bg-[#C9A063]/50" />
-              <span className="font-mono text-xs sm:text-sm text-[#C9A063] tracking-[0.35em] uppercase font-semibold">
-                {t("atelierEyebrow")}
+        {/* ── Left-Aligned Integrated Sub-Header ─────────────────────────── */}
+        <ParallaxReveal yOffset={16} duration={0.6}>
+          <div className="text-left space-y-2 border-b border-[#C9A063]/20 pb-4">
+            <div className="flex items-center space-x-3">
+              <span className="font-mono text-xs text-[#C9A063] tracking-[0.25em] uppercase font-semibold">
+                {language === "UA" ? "КАТАЛОГ ЛІНІЙОК АТЕЛЬЄ" : "ATELIER DIRECTORY & LINES"}
               </span>
-              <span className="h-[1px] w-10 bg-[#C9A063]/50" />
+              <span className="h-[1px] w-8 bg-[#C9A063]/40" />
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#F3EEE6] uppercase tracking-[0.06em] leading-[1.18]">
-              {t("atelierTitle")}
-            </h2>
+            <p className="font-serif text-lg sm:text-xl font-light text-[#F3EEE6] uppercase tracking-wide">
+              {language === "UA" ? "Допоміжні Лінії та Архіви" : "Atelier Lines & Horizons"}
+            </p>
           </div>
         </ParallaxReveal>
 
-        {/* ── Accordion Groups ─────────────────────────────────────────── */}
+        {/* ── Accordion Groups (Left-aligned) ─────────────────────────────────── */}
         <div className="divide-y divide-[#DCC8AA]/12">
           {GROUPS.map((group) => {
             const isOpen = openGroups.has(group.id);
@@ -100,13 +99,13 @@ export function AtelierExpansionSection() {
                 {/* Group Toggle Header */}
                 <button
                   onClick={() => toggleGroup(group.id)}
-                  className="w-full flex items-center justify-between px-2 sm:px-4 py-5 sm:py-6 cursor-pointer transition-colors duration-300 hover:bg-[#C9A063]/4 group"
+                  className="w-full flex items-center justify-between px-2 sm:px-4 py-4 sm:py-5 cursor-pointer transition-colors duration-300 hover:bg-[#C9A063]/4 group"
                 >
                   <div className="flex items-center space-x-4">
                     <span className="font-mono text-[10px] sm:text-xs text-[#C9A063] tracking-[0.3em] uppercase font-semibold">
                       {group.id}
                     </span>
-                    <span className="font-serif text-base sm:text-lg md:text-xl font-light uppercase tracking-[0.1em] text-[#F3EEE6] group-hover:text-[#C9A063] transition-colors duration-300">
+                    <span className="font-serif text-base sm:text-lg font-light uppercase tracking-[0.1em] text-[#F3EEE6] group-hover:text-[#C9A063] transition-colors duration-300">
                       {label}
                     </span>
                   </div>
@@ -143,18 +142,18 @@ export function AtelierExpansionSection() {
                               key={line.id}
                               onMouseEnter={() => setHoveredId(line.id)}
                               onMouseLeave={() => setHoveredId(null)}
-                              className={`relative py-3.5 flex items-center justify-between cursor-pointer transition-all duration-300 ${
-                                isHov ? "pl-5 bg-[#C9A063]/[0.04]" : "pl-2 sm:pl-4"
+                              className={`relative py-3 flex items-center justify-between cursor-pointer transition-all duration-300 ${
+                                isHov ? "pl-4 bg-[#C9A063]/[0.04]" : "pl-2 sm:pl-4"
                               }`}
                             >
-                              <div className="flex items-center space-x-5 flex-1 min-w-0 pr-4">
+                              <div className="flex items-center space-x-4 flex-1 min-w-0 pr-4">
                                 <span className={`font-sans text-xs tracking-widest font-semibold flex-shrink-0 transition-colors duration-300 ${
                                   isHov ? "text-[#C9A063]" : "text-[#C9A063]/55"
                                 }`}>
                                   {line.num}
                                 </span>
                                 <div className="space-y-0.5 min-w-0">
-                                  <h3 className={`font-serif text-sm sm:text-base md:text-lg font-light uppercase tracking-wide transition-colors duration-300 ${
+                                  <h3 className={`font-serif text-sm sm:text-base font-light uppercase tracking-wide transition-colors duration-300 ${
                                     isHov ? "text-[#C9A063]" : "text-[#F3EEE6]"
                                   }`}>
                                     {title}
@@ -188,14 +187,14 @@ export function AtelierExpansionSection() {
           })}
         </div>
 
-        {/* Centered "Open Full Archive Page" Button — placed below list, 2x smaller */}
-        <div className="pt-6 sm:pt-8 flex justify-center">
+        {/* Left-Aligned Compact "Open Full Catalog" Button */}
+        <div className="pt-4 flex justify-start">
           <Link
             href="/catalog"
-            className="group relative inline-flex items-center space-x-2.5 px-5 py-2.5 bg-transparent border border-[#C9A063]/60 text-[#F3EEE6] hover:bg-[#C9A063] hover:text-[#060803] transition-all duration-300 font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold rounded-none cursor-pointer shadow-md luxury-shimmer-btn"
+            className="group inline-flex items-center space-x-2 px-4 py-2 bg-transparent border border-[#C9A063]/40 text-[#F3EEE6] hover:bg-[#C9A063] hover:text-[#060803] transition-all duration-300 font-sans text-[11px] sm:text-xs uppercase tracking-[0.18em] font-medium rounded-none cursor-pointer shadow-sm"
           >
-            <span>{language === "UA" ? "Відкрити Повний Каталог" : "Open Full Archive Page"}</span>
-            <span className="text-[#C9A063] group-hover:text-[#060803] group-hover:translate-x-1.5 transition-transform duration-300">
+            <span>{language === "UA" ? "Відкрити Повний Каталог" : "Open Full Catalog"}</span>
+            <span className="text-[#C9A063] group-hover:text-[#060803] group-hover:translate-x-1 transition-transform duration-300">
               →
             </span>
           </Link>
